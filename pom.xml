@@ -17,7 +17,6 @@
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}
         </destDir>
         <jquery.version>2.2.2</jquery.version>
-        <jquery-template.version>1.5.0</jquery-template.version>
     </properties>
 
     <scm>
@@ -45,8 +44,8 @@
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
-            <artifactId>jquery-template</artifactId>
-            <version>${jquery-template.version}</version>
+            <artifactId>mustachejs</artifactId>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
 
@@ -87,8 +86,13 @@
                                 <move todir="${destDir}">
                                     <fileset dir="${project.build.outputDirectory}/">
                                         <exclude name="META-INF/"/>
+                                        <exclude name="es2015/"/>
                                     </fileset>
                                 </move>
+                                <echo message="delete es2015"/>
+                                <delete includeEmptyDirs="true">
+                                    <fileset dir="${project.build.outputDirectory}/es2015/"/>
+                                </delete>
                             </target>
                         </configuration>
                     </execution>
