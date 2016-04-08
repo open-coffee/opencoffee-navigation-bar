@@ -36,6 +36,7 @@ Now just add the simple html snipped listed below where you want to show the Cof
 ### Build
 
 ```
-npm install
 mvn clean install
 ```
+
+This command will trigger 'npm install' that will trigger webpack to convert the es2015 javascript file into es5.
