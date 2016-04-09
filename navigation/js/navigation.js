@@ -12,6 +12,7 @@ $(function () {
         .then(data => {
 
             if (data.length === 0) {
+                console.info('CoffeeNet: No application discovered');
                 apps.push({name: 'No other applications registered', url: ''});
                 return;
             }
@@ -21,7 +22,7 @@ $(function () {
             });
         })
         .fail(() => {
-            console.error('Could not receive modules');
+            console.info('CoffeeNet: Could not receive discovered applications');
             apps.push({name: 'Could not receive CoffeeNet applications', url: ''});
         });
 
