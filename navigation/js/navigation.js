@@ -1,6 +1,5 @@
 $(function () {
 
-
     let username = '';
     let apps = [];
 
@@ -26,7 +25,7 @@ $(function () {
         });
 
     $.when(usernameDeferred, appsDeferred).then(() => {
-        $.get('/webjars/@project.artifactId@/@project.version@/navigation.html', template => {
+        $.get('/webjars/@project.artifactId@/@project.version@/template/navigation.html', template => {
             var rendered = Mustache.render(template, {
                 username: username,
                 apps: apps

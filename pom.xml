@@ -86,13 +86,9 @@
                                 <move todir="${destDir}">
                                     <fileset dir="${project.build.outputDirectory}/">
                                         <exclude name="META-INF/"/>
-                                        <exclude name="es2015/"/>
                                     </fileset>
                                 </move>
-                                <echo message="delete es2015"/>
-                                <delete includeEmptyDirs="true">
-                                    <fileset dir="${project.build.outputDirectory}/es2015/"/>
-                                </delete>
+                                <delete dir="${basedir}/src" includeemptydirs="true"/>
                             </target>
                         </configuration>
                     </execution>

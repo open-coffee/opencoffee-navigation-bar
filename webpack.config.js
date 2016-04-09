@@ -1,11 +1,11 @@
-var path = require ('path');
+var path = require('path');
 
-var inputPath = path.resolve (__dirname, 'src/main/resources/es2015');
-var outputPath = path.resolve (__dirname, 'src/main/resources');
+var inputPath = path.resolve(__dirname, 'navigation/js');
+var outputPath = path.resolve(__dirname, 'src/main/resources');
 
 module.exports = {
 
-    entry: inputPath + '/navigation_es2015.js',
+    entry: inputPath + '/navigation.js',
 
     output: {
         path: outputPath,
@@ -16,7 +16,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /node_modules/,
                 loader: 'babel',
                 query: {
                     presets: ['es2015']

@@ -4,8 +4,9 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "webpack",
-    "postinstall": "npm run build"
+    "postinstall": "npm run copy && npm run build",
+    "copy": "mkdir -p src/main/resources && cp -R navigation/css navigation/template src/main/resources",
+    "build": "webpack"
   },
   "author": "Tobias Schneider <schneider@synyx.de>",
   "devDependencies": {
