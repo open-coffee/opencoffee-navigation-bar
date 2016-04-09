@@ -16,7 +16,7 @@ $(function () {
             }
 
             data.forEach(app => {
-                apps.push({name: app.instanceInfo.secureVipAddress, url: app.instanceInfo.homePageUrl});
+                apps.push({name: app.name, url: app.url});
             });
         })
         .fail(() => {
