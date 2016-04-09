@@ -13,6 +13,7 @@ $(function () {
 
             if (data.length === 0) {
                 apps.push({name: 'No other applications registered', url: ''});
+                return;
             }
 
             data.forEach(app => {
