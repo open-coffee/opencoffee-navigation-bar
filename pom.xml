@@ -16,7 +16,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}
         </destDir>
-        <jquery.version>2.2.2</jquery.version>
     </properties>
 
     <scm>
@@ -40,7 +39,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>${jquery.version}</version>
+            <version>2.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
