@@ -30,20 +30,39 @@ let appsPromise = getIt('/coffeenet/apps')
 
 Promise.all([usernamePromise, appsPromise]).then(() => {
     getIt('/webjars/@project.artifactId@/@project.version@/template/navigation.html').then(html => {
+
+        // add template to dom
         document.getElementById('coffeenet-header').innerHTML = html;
 
-        let coffeeNetAppsHtml = document.getElementById('coffeenet-apps');
-        for (let app of appsToShow) {
-            let li = document.createElement('li');
-            let a = document.createElement('a');
-            a.setAttribute('href', app.url);
-            let aText = document.createTextNode(app.name);
+        // add apps
+        addApps(appsToShow, 'coffeenet-apps');
 
-            a.appendChild(aText);
-            li.appendChild(a);
-            coffeeNetAppsHtml.appendChild(li);
-        }
-
+        // add username
         document.getElementById('coffeenet-username').innerHTML = username;
     });
 });
+
+/**
+ * Add the apps as
+ *   <li>
+ *       <a href='$url'>$name</a>
+ *   </li>
+ * under the given selector
+ *
+ * @param apps to display in navigation
+ * @param selector where the applications should be displayed
+ */
+function addApps(apps, selector) {
+    let coffeeNetAppsHtml = document.getElementById(selector);
+    for (let app of apps) {
+        let li = document.createElement('li');
+        let a = document.createElement('a');
+        a.setAttribute('href', app.url);
+
+        let aText = document.createTextNode(app.name);
+        a.appendChild(aText);
+
+        li.appendChild(a);
+        coffeeNetAppsHtml.appendChild(li);
+    }
+}
