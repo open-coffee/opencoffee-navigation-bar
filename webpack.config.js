@@ -25,20 +25,5 @@ module.exports = {
                 }
             }
         ]
-    },
-
-    resolve: {
-        modulesDirectories: ['node_modules', 'src'],
-        fallback: path.join(__dirname, 'node_modules'),
-        alias: {
-            'handlebars': 'handlebars/dist/handlebars.min.js'
-        }
-    },
-
-    resolveLoader: {
-        fallback: path.join(__dirname, 'node_modules'),
-        alias: {
-            'hbs': 'handlebars-loader'
-        }
     }
 };

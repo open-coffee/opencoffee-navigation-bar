@@ -1,4 +1,3 @@
-import Handlebars from 'handlebars';
 import getIt from './requester';
 
 let username = '';
@@ -31,10 +30,20 @@ let appsPromise = getIt('/coffeenet/apps')
 
 Promise.all([usernamePromise, appsPromise]).then(() => {
     getIt('/webjars/@project.artifactId@/@project.version@/template/navigation.html').then(html => {
-        let template = Handlebars.compile(html);
-        document.getElementById("coffeenet-header").innerHTML = template({
-            username: username,
-            apps: appsToShow
-        });
+        document.getElementById('coffeenet-header').innerHTML = html;
+
+        let coffeeNetAppsHtml = document.getElementById('coffeenet-apps');
+        for (let app of appsToShow) {
+            let li = document.createElement('li');
+            let a = document.createElement('a');
+            a.setAttribute('href', app.url);
+            let aText = document.createTextNode(app.name);
+
+            a.appendChild(aText);
+            li.appendChild(a);
+            coffeeNetAppsHtml.appendChild(li);
+        }
+
+        document.getElementById('coffeenet-username').innerHTML = username;
     });
 });
