@@ -1,4 +1,4 @@
- function getIt(url) {
+function getIt(url) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url);

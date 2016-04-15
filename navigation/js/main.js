@@ -18,6 +18,7 @@ let appsPromise = getIt('/coffeenet/apps')
             appsToShow.push({name: 'No other applications registered', url: ''});
             return;
         }
+
         apps.sort(compareByName);
         appsToShow = apps;
     })
