@@ -6,11 +6,14 @@ var outputPath = path.resolve(__dirname, 'src/main/resources');
 
 module.exports = {
 
-    entry: inputPath + '/main.js',
+    entry: {
+        "bundle": inputPath + '/main.js',
+        "bundle.min": inputPath + '/main.js'
+    },
 
     output: {
         path: outputPath,
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
 
     devtool: 'cheap-module-source-map',
@@ -30,7 +33,8 @@ module.exports = {
 
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
-            output: 'bundle.min.js'
+            include: /\.min\.js$/,
+            minimize: true
         })
     ]
 };
