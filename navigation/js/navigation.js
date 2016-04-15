@@ -1,3 +1,5 @@
+import Handlebars from 'handlebars';
+
 $(function () {
 
     let username = '';
@@ -28,7 +30,7 @@ $(function () {
 
     $.when(usernameDeferred, appsDeferred).then(() => {
         $.get('/webjars/@project.artifactId@/@project.version@/template/navigation.html', template => {
-            var rendered = Mustache.render(template, {
+            var rendered = Handlebars.compile(template)({
                 username: username,
                 apps: apps
             });
