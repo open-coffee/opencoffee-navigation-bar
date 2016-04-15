@@ -12,6 +12,8 @@ module.exports = {
         filename: 'navigation.js'
     },
 
+    devtool: 'cheap-module-source-map',
+
     module: {
         loaders: [
             {
