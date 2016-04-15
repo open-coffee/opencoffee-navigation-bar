@@ -4,7 +4,7 @@
 
     <groupId>coffee.synyx</groupId>
     <artifactId>navigation-bar</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
@@ -19,7 +19,7 @@
     <scm>
         <connection>scm:git:ssh://git@git.synyx.de/coffeenet/navigation-bar.git</connection>
         <developerConnection>scm:git:ssh://git@git.synyx.de/coffeenet/navigation-bar.git</developerConnection>
-        <tag>navigation-bar-0.2.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
