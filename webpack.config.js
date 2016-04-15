@@ -1,15 +1,16 @@
 var path = require('path');
+var webpack = require('webpack');
 
 var inputPath = path.resolve(__dirname, 'navigation/js');
 var outputPath = path.resolve(__dirname, 'src/main/resources');
 
 module.exports = {
 
-    entry: inputPath + '/navigation.js',
+    entry: inputPath + '/main.js',
 
     output: {
         path: outputPath,
-        filename: 'navigation.js'
+        filename: 'bundle.js'
     },
 
     devtool: 'cheap-module-source-map',
@@ -25,5 +26,11 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            output: 'bundle.min.js'
+        })
+    ]
 };

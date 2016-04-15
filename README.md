@@ -17,7 +17,13 @@
 Just add the javascript dependency
 
 ```
-<script src="/webjars/navigation-bar/${version}/navigation.js"></script>
+<script src="/webjars/navigation-bar/${version}/bundle.js"></script>
+```
+
+or minimized
+
+```
+<script src="/webjars/navigation-bar/${version}/bundle.min.js"></script>
 ```
 
 ### Html
