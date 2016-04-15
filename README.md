@@ -14,11 +14,9 @@
 
 ### Javascript
 
-Just add the javascript dependencies of jquery, mustache and from the navigation.
+Just add the javascript dependency
 
 ```
-<script src="/webjars/jquery/2.1.1/jquery.min.js"></script>
-<script src="/webjars/mustachejs/2.2.1/mustache.min.js"></script>
 <script src="/webjars/navigation-bar/${version}/navigation.js"></script>
 ```
 
