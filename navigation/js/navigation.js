@@ -1,40 +1,40 @@
 import Handlebars from 'handlebars';
+import getIt from './requester';
 
-$(function () {
+let username = '';
+let appsToShow = [];
 
-    let username = '';
-    let apps = [];
+let usernamePromise = getIt('/coffeenet/user')
+    .then(JSON.parse)
+    .then(user => {
+        username = user.username;
+    });
 
-    let usernameDeferred = $.ajax('/coffeenet/user')
-        .then(data => {
-            username = data;
-        });
+let appsPromise = getIt('/coffeenet/apps')
+    .then(JSON.parse)
+    .then(apps => {
 
-    let appsDeferred = $.ajax('/coffeenet/apps')
-        .then(data => {
+        if (apps.length === 0) {
+            console.info('CoffeeNet: No application discovered');
+            appsToShow.push({name: 'No other applications registered', url: ''});
+            return;
+        }
 
-            if (data.length === 0) {
-                console.info('CoffeeNet: No application discovered');
-                apps.push({name: 'No other applications registered', url: ''});
-                return;
-            }
+        for (let app of apps) {
+            appsToShow.push({name: app.name, url: app.url});
+        }
+    })
+    .catch((err) => {
+        console.info('CoffeeNet: Could not receive discovered applications', err);
+        appsToShow.push({name: 'Could not receive CoffeeNet applications', url: ''});
+    });
 
-            data.forEach(app => {
-                apps.push({name: app.name, url: app.url});
-            });
-        })
-        .fail(() => {
-            console.info('CoffeeNet: Could not receive discovered applications');
-            apps.push({name: 'Could not receive CoffeeNet applications', url: ''});
-        });
-
-    $.when(usernameDeferred, appsDeferred).then(() => {
-        $.get('/webjars/@project.artifactId@/@project.version@/template/navigation.html', template => {
-            var rendered = Handlebars.compile(template)({
-                username: username,
-                apps: apps
-            });
-            $('header#coffeenet-header').html(rendered);
+Promise.all([usernamePromise, appsPromise]).then(() => {
+    getIt('/webjars/@project.artifactId@/@project.version@/template/navigation.html').then(html => {
+        let template = Handlebars.compile(html);
+        document.getElementById("coffeenet-header").innerHTML = template({
+            username: username,
+            apps: appsToShow
         });
     });
 });
