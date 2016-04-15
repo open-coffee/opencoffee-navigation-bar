@@ -18,10 +18,8 @@ let appsPromise = getIt('/coffeenet/apps')
             appsToShow.push({name: 'No other applications registered', url: ''});
             return;
         }
-
-        for (let app of apps) {
-            appsToShow.push({name: app.name, url: app.url});
-        }
+        apps.sort(compareByName);
+        appsToShow = apps;
     })
     .catch((err) => {
         console.info('CoffeeNet: Could not receive discovered applications', err);
@@ -64,5 +62,17 @@ function addApps(apps, selector) {
 
         li.appendChild(a);
         coffeeNetAppsHtml.appendChild(li);
+    }
+}
+
+function compareByName(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    }
+    else if (a.name > b.name) {
+        return 1;
+    }
+    else {
+        return 0;
     }
 }
