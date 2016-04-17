@@ -2,6 +2,11 @@
 
 ## How to use
 
+The navigation bar adds the navigation between the CoffeeNet Applications.
+
+To use it you just need to add the maven dependency below and Bootstrap with jQuery and you are ready to go.
+If you have already bootstrap in your project so just use that dependency.
+
 ### Maven
 
 ```
@@ -33,6 +38,14 @@ Now just add the simple html snipped listed below where you want to show the Cof
 ```
 <!-- CoffeeNet header -->
 <header id="coffeenet-header"></header>
+```
+
+#### Optional
+
+```
+    <link rel="stylesheet" href="webjars/bootstrap/${bootstrap.version}/css/bootstrap.min.css">
+    <script src="/webjars/jquery/${jquery.version}/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/${bootstrap.version}/js/bootstrap.min.js"></script>
 ```
 
 ## Development
