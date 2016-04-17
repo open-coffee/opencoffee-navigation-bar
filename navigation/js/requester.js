@@ -1,3 +1,12 @@
+/**
+ * Returns the information behind the given url as plain text.
+ * If you want this information as json then you have to call
+ *
+ * getIt(<url>).then(JSON.parse).then((jsonData) => { <your code> });
+ *
+ * @param url to get information from
+ * @returns {Promise}
+ */
 function getIt(url) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
