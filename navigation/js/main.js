@@ -27,19 +27,21 @@ let appsPromise = getIt('/coffeenet/apps')
         appsToShow.push({name: 'Could not receive CoffeeNet applications', url: ''});
     });
 
-Promise.all([usernamePromise, appsPromise]).then(() => {
-    getIt('/webjars/@project.artifactId@/@project.version@/template/navigation.html').then(html => {
-
+getIt('/webjars/@project.artifactId@/@project.version@/template/navigation.html')
+    .then(html => {
         // add template to dom
         document.getElementById('coffeenet-header').innerHTML = html;
 
-        // add apps
-        addApps(appsToShow, 'coffeenet-apps');
+        usernamePromise.then(() => {
+            // add username
+            document.getElementById('coffeenet-username').innerHTML = username;
+        });
 
-        // add username
-        document.getElementById('coffeenet-username').innerHTML = username;
+        appsPromise.then(() => {
+            // add apps
+            addApps(appsToShow, 'coffeenet-apps');
+        });
     });
-});
 
 /**
  * Add the apps as
