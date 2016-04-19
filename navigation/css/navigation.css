@@ -1,3 +1,7 @@
+.coffeenet-header {
+    min-height: 70px;
+}
+
 #logo {
     color: #1b2a05;
     display: block;

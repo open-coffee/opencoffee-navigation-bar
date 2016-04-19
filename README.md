@@ -37,7 +37,7 @@ Now just add the simple html snipped listed below where you want to show the Cof
 
 ```
 <!-- CoffeeNet header -->
-<header id="coffeenet-header"></header>
+<header id="coffeenet-header" class="coffeenet-header"></header>
 ```
 
 #### Optional
