@@ -50,6 +50,8 @@ Now just add the simple html snipped listed below where you want to show the Cof
 
 ## Development
 
+Only change the files based in the /navigation folder.
+
 ### Build
 
 ```
