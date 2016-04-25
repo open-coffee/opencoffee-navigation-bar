@@ -13,7 +13,7 @@
     text-decoration: none;
     font-size: 20px;
     margin-right: 70px;
-    background: url(/webjars/@project.artifactId@/@project.version@/css/synyx-logo-nav.png) no-repeat center center;
+    background: url(/webjars/@project.artifactId@/css/synyx-logo-nav.png) no-repeat center center;
     background-size: 75px auto;
     overflow: hidden;
     text-indent: -9999px;

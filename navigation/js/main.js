@@ -27,7 +27,7 @@ let appsPromise = getIt('/coffeenet/apps')
         appsToShow.push({name: 'Could not receive CoffeeNet applications', url: ''});
     });
 
-getIt('/webjars/@project.artifactId@/@project.version@/template/navigation.html')
+getIt('/webjars/@project.artifactId@/template/navigation.html')
     .then(html => {
         // add template to dom
         document.getElementById('coffeenet-header').innerHTML = html;
