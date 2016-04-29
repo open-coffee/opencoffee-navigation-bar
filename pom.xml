@@ -17,8 +17,8 @@
     </properties>
 
     <scm>
-        <connection>scm:git:ssh://git@git.synyx.de/coffeenet/navigation-bar.git</connection>
-        <developerConnection>scm:git:ssh://git@git.synyx.de/coffeenet/navigation-bar.git</developerConnection>
+        <connection>scm:git:ssh://git@gitlab-test.synyx.coffee/coffeenet/navigation-bar.git</connection>
+        <developerConnection>scm:git:ssh://git@gitlab-test.synyx.coffee/coffeenet/navigation-bar.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
