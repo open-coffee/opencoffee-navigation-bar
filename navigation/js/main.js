@@ -1,4 +1,5 @@
-import { GET, GET_JSON } from './requester';
+
+import { GET, GET_JSON } from './http';
 
 let username = '';
 let appsToShow = [];
