@@ -68,13 +68,5 @@ function addApps(apps, selector) {
 function compareByName(a, b) {
     let nameA = a.name.toLowerCase();
     let nameB = b.name.toLowerCase();
-    if (nameA < nameB) {
-        return -1;
-    }
-    else if (nameA > nameB) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
+    return nameA.localeCompare (nameB);
 }
