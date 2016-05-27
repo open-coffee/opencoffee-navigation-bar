@@ -1,16 +1,14 @@
-import getIt from './requester';
+import { GET, GET_JSON } from './requester';
 
 let username = '';
 let appsToShow = [];
 
-let usernamePromise = getIt('/coffeenet/user')
-    .then(JSON.parse)
+let usernamePromise = GET_JSON ('/coffeenet/user')
     .then(user => {
         username = user.username;
     });
 
-let appsPromise = getIt('/coffeenet/apps')
-    .then(JSON.parse)
+let appsPromise = GET_JSON ('/coffeenet/apps')
     .then(apps => {
 
         if (apps.length === 0) {
@@ -27,7 +25,7 @@ let appsPromise = getIt('/coffeenet/apps')
         appsToShow.push({name: 'Could not receive CoffeeNet applications', url: ''});
     });
 
-getIt('/webjars/@project.artifactId@/template/navigation.html')
+GET('/webjars/@project.artifactId@/template/navigation.html')
     .then(html => {
         // add template to dom
         document.getElementById('coffeenet-header').innerHTML = html;
