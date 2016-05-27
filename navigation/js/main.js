@@ -51,18 +51,13 @@ Promise.all ([
  * @param selector where the applications should be displayed
  */
 function addApps(apps, selector) {
-    let coffeeNetAppsHtml = document.getElementById(selector);
-    for (let app of apps) {
-        let li = document.createElement('li');
-        let a = document.createElement('a');
-        a.setAttribute('href', app.url);
 
-        let aText = document.createTextNode(app.name);
-        a.appendChild(aText);
+    const appListItemsHtml = apps
+        .map  (app => `<li><a href="${app.url}">${app.name}</a></li>`)
+        .join ('');
 
-        li.appendChild(a);
-        coffeeNetAppsHtml.appendChild(li);
-    }
+    const coffeeNetApps = document.getElementById(selector);
+          coffeeNetApps.innerHTML = appListItemsHtml;
 }
 
 function compareByName(a, b) {
