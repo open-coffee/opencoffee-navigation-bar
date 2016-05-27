@@ -1,8 +1,9 @@
-.coffeenet-header {
+
+.header {
     min-height: 70px;
 }
 
-#logo {
+.logo {
     color: #1b2a05;
     display: block;
     float: left;

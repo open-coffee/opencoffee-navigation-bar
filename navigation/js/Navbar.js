@@ -1,6 +1,10 @@
 
+import styles from './navbar.css'
+
+
 export default function Navbar () {
-    return `<nav class="navbar navbar-default">
+    return `<div class="${styles.header}">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -10,7 +14,7 @@ export default function Navbar () {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a id="logo" href="https://synyx.coffee" title="CoffeeNet Frontpage">Synyx Logo</a>
+            <a id="logo" class="${styles.logo}" href="https://synyx.coffee" title="CoffeeNet Frontpage">Synyx Logo</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,5 +44,6 @@ export default function Navbar () {
             </ul>
         </div>
     </div>
-</nav>`;
+</nav>
+</div>`;
 }
