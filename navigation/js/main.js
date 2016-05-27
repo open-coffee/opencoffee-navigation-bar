@@ -1,47 +1,44 @@
-import getIt from './requester';
 
-let username = '';
-let appsToShow = [];
+import { GET, GET_JSON } from './http';
 
-let usernamePromise = getIt('/coffeenet/user')
-    .then(JSON.parse)
-    .then(user => {
-        username = user.username;
-    });
 
-let appsPromise = getIt('/coffeenet/apps')
-    .then(JSON.parse)
-    .then(apps => {
+let fetchUsername = GET_JSON ('/coffeenet/user')
+    .then(user => user.username);
+
+let fetchApps = GET_JSON ('/coffeenet/apps')
+    .then(data => {
+        let apps = [].slice.call (data);
 
         if (apps.length === 0) {
             console.info('CoffeeNet: No application discovered');
-            appsToShow.push({name: 'No other applications registered', url: ''});
-            return;
+            return [
+                {name: 'No other applications registered', url: ''}
+            ];
         }
 
-        apps.sort(compareByName);
-        appsToShow = apps;
+               apps.sort(compareByName);
+        return apps;
     })
     .catch((err) => {
         console.info('CoffeeNet: Could not receive discovered applications', err);
-        appsToShow.push({name: 'Could not receive CoffeeNet applications', url: ''});
+        return Promise.resolve ([
+            {name: 'Could not receive CoffeeNet applications', url: ''}
+        ]);
     });
 
-getIt('/webjars/@project.artifactId@/template/navigation.html')
-    .then(html => {
-        // add template to dom
-        document.getElementById('coffeenet-header').innerHTML = html;
+let fetchHtml = GET('/webjars/@project.artifactId@/template/navigation.html');
 
-        usernamePromise.then(() => {
-            // add username
-            document.getElementById('coffeenet-username').innerHTML = username;
-        });
+Promise.all ([
+    fetchUsername,
+    fetchApps,
+    fetchHtml
+]).then (values => {
+    let [username, apps, html] = values;
+    document.getElementById('coffeenet-header').innerHTML = html;
+    document.getElementById('coffeenet-username').innerHTML = username;
+    addApps(apps, 'coffeenet-apps')
+});
 
-        appsPromise.then(() => {
-            // add apps
-            addApps(appsToShow, 'coffeenet-apps');
-        });
-    });
 
 /**
  * Add the apps as
@@ -54,30 +51,17 @@ getIt('/webjars/@project.artifactId@/template/navigation.html')
  * @param selector where the applications should be displayed
  */
 function addApps(apps, selector) {
-    let coffeeNetAppsHtml = document.getElementById(selector);
-    for (let app of apps) {
-        let li = document.createElement('li');
-        let a = document.createElement('a');
-        a.setAttribute('href', app.url);
 
-        let aText = document.createTextNode(app.name);
-        a.appendChild(aText);
+    const appListItemsHtml = apps
+        .map  (app => `<li><a href="${app.url}">${app.name}</a></li>`)
+        .join ('');
 
-        li.appendChild(a);
-        coffeeNetAppsHtml.appendChild(li);
-    }
+    const coffeeNetApps = document.getElementById(selector);
+          coffeeNetApps.innerHTML = appListItemsHtml;
 }
 
 function compareByName(a, b) {
     let nameA = a.name.toLowerCase();
     let nameB = b.name.toLowerCase();
-    if (nameA < nameB) {
-        return -1;
-    }
-    else if (nameA > nameB) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
+    return nameA.localeCompare (nameB);
 }
