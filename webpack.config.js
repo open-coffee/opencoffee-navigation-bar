@@ -29,6 +29,10 @@ module.exports = {
                 )
             },
             {
+                test: /\.jpg|png|svg|gif/,
+                loader: 'url'
+            },
+            {
                 test: /\.js$/,
                 include: path.resolve (__dirname, 'navigation'),
                 loader: 'babel',

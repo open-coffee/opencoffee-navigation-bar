@@ -14,7 +14,7 @@ export default function Navbar () {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a id="logo" class="${styles.logo}" href="https://synyx.coffee" title="CoffeeNet Frontpage">Synyx Logo</a>
+            <a href="https://synyx.coffee" title="CoffeeNet Frontpage"><i class="${styles.logo}">Synyx Logo</i></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
