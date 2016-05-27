@@ -1,4 +1,5 @@
-import {GET, GET_JSON} from './http';
+
+import { GET, GET_JSON } from 'coffee-fetch';
 
 
 let fetchUsername = GET_JSON('/coffeenet/user')
