@@ -10,7 +10,8 @@ let usernamePromise = GET_JSON ('/coffeenet/user')
     });
 
 let appsPromise = GET_JSON ('/coffeenet/apps')
-    .then(apps => {
+    .then(data => {
+        let apps = [].slice.call (data);
 
         if (apps.length === 0) {
             console.info('CoffeeNet: No application discovered');
