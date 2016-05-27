@@ -26,17 +26,19 @@ let fetchApps = GET_JSON ('/coffeenet/apps')
         ]);
     });
 
-GET('/webjars/@project.artifactId@/template/navigation.html')
-    .then(html => {
-        // add template to dom
-        document.getElementById('coffeenet-header').innerHTML = html;
+let fetchHtml = GET('/webjars/@project.artifactId@/template/navigation.html');
 
-        fetchUsername.then(username => {
-            document.getElementById('coffeenet-username').innerHTML = username;
-        });
+Promise.all ([
+    fetchUsername,
+    fetchApps,
+    fetchHtml
+]).then (values => {
+    let [username, apps, html] = values;
+    document.getElementById('coffeenet-header').innerHTML = html;
+    document.getElementById('coffeenet-username').innerHTML = username;
+    addApps(apps, 'coffeenet-apps')
+});
 
-        fetchApps.then(apps => addApps(apps, 'coffeenet-apps'));
-    });
 
 /**
  * Add the apps as
