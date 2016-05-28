@@ -1,5 +1,5 @@
 
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 
 /**
  * Returns the information behind the given url as plain text.
@@ -49,5 +49,5 @@ function isOk ({ status }) {
 }
 
 function isJsonContent ({ headers }) {
-    return /application\/json/.test (headers.get ('Content-Type'))
+    return /application\/json/.test (headers.get ('Content-Type'));
 }

@@ -1,13 +1,12 @@
+import {GET, GET_JSON} from './http';
 
-import { GET, GET_JSON } from './http';
 
-
-let fetchUsername = GET_JSON ('/coffeenet/user')
+let fetchUsername = GET_JSON('/coffeenet/user')
     .then(user => user.username);
 
-let fetchApps = GET_JSON ('/coffeenet/apps')
+let fetchApps = GET_JSON('/coffeenet/apps')
     .then(data => {
-        let apps = [].slice.call (data);
+        let apps = [].slice.call(data);
 
         if (apps.length === 0) {
             console.info('CoffeeNet: No application discovered');
@@ -16,27 +15,27 @@ let fetchApps = GET_JSON ('/coffeenet/apps')
             ];
         }
 
-               apps.sort(compareByName);
+        apps.sort(compareByName);
         return apps;
     })
     .catch((err) => {
         console.info('CoffeeNet: Could not receive discovered applications', err);
-        return Promise.resolve ([
+        return Promise.resolve([
             {name: 'Could not receive CoffeeNet applications', url: ''}
         ]);
     });
 
 let fetchHtml = GET('/webjars/@project.artifactId@/template/navigation.html');
 
-Promise.all ([
+Promise.all([
     fetchUsername,
     fetchApps,
     fetchHtml
-]).then (values => {
+]).then(values => {
     let [username, apps, html] = values;
     document.getElementById('coffeenet-header').innerHTML = html;
     document.getElementById('coffeenet-username').innerHTML = username;
-    addApps(apps, 'coffeenet-apps')
+    addApps(apps, 'coffeenet-apps');
 });
 
 
@@ -53,15 +52,15 @@ Promise.all ([
 function addApps(apps, selector) {
 
     const appListItemsHtml = apps
-        .map  (app => `<li><a href="${app.url}">${app.name}</a></li>`)
-        .join ('');
+        .map(app => `<li><a href="${app.url}">${app.name}</a></li>`)
+        .join('');
 
     const coffeeNetApps = document.getElementById(selector);
-          coffeeNetApps.innerHTML = appListItemsHtml;
+    coffeeNetApps.innerHTML = appListItemsHtml;
 }
 
 function compareByName(a, b) {
     let nameA = a.name.toLowerCase();
     let nameB = b.name.toLowerCase();
-    return nameA.localeCompare (nameB);
+    return nameA.localeCompare(nameB);
 }
