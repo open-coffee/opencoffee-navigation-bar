@@ -1,5 +1,6 @@
-<link rel="stylesheet" type="text/css" href="/webjars/@project.artifactId@/css/navigation.css"/>
-<nav class="navbar navbar-default">
+
+export default function Navbar () {
+    return `<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -39,4 +40,5 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav>`;
+}

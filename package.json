@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "postinstall": "npm run linting && npm run copy && npm run build",
-    "copy": "mkdir -p src/main/resources && cp -R navigation/css navigation/template src/main/resources",
+    "copy": "mkdir -p src/main/resources && cp -R navigation/css src/main/resources",
     "build": "webpack",
     "linting": "./node_modules/eslint/bin/eslint.js navigation/**; true"
   },
