@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require ('extract-text-webpack-plugin');
 
-var inputPath = path.resolve(__dirname, 'navigation/js');
+var inputPath = path.resolve(__dirname, 'navigation');
 var outputPath = path.resolve(__dirname, 'src/main/resources');
 
 module.exports = {

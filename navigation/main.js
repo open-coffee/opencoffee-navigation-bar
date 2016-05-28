@@ -1,6 +1,6 @@
 
 import { GET, GET_JSON } from 'coffee-fetch';
-import Navbar from './Navbar'
+import Navbar from './Navbar/Navbar'
 
 
 let fetchUsername = GET_JSON('/coffeenet/user')
