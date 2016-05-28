@@ -4,7 +4,8 @@ import styles from './navbar.css'
 
 
 export default function navbar ({
-    username
+    username,
+    apps = []
 }) {
     return html`
         <div class="${styles.header}">
@@ -28,7 +29,7 @@ export default function navbar ({
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Applications <span class="caret"></span></a>
                                 <ul id="coffeenet-apps" class="dropdown-menu">
-                                    <!-- render by javascript -->
+                                    ${apps.map (app => `<li><a href="${app.url}">${app.name}</a></li>`)}
                                 </ul>
                             </li>
                         </ul>

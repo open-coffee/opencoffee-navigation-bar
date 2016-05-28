@@ -40,30 +40,9 @@ Promise.all([
     fetchApps
 ]).then (values => {
     const [username, apps] = values;
-    document.getElementById('coffeenet-header').innerHTML = Navbar ({ username });
-    addApps(apps, 'coffeenet-apps');
+    document.getElementById('coffeenet-header').innerHTML = Navbar ({ username, apps });
 });
 
-
-/**
- * Add the apps as
- *   <li>
- *       <a href='$url'>$name</a>
- *   </li>
- * under the given selector
- *
- * @param apps to display in navigation
- * @param selector where the applications should be displayed
- */
-function addApps(apps, selector) {
-
-    const appListItemsHtml = apps
-        .map(app => `<li><a href="${app.url}">${app.name}</a></li>`)
-        .join('');
-
-    const coffeeNetApps = document.getElementById(selector);
-    coffeeNetApps.innerHTML = appListItemsHtml;
-}
 
 function compareByName(a, b) {
     let nameA = a.name.toLowerCase();
