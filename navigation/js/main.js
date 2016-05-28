@@ -40,8 +40,7 @@ Promise.all([
     fetchApps
 ]).then (values => {
     const [username, apps] = values;
-    document.getElementById('coffeenet-header').innerHTML = Navbar ();
-    document.getElementById('coffeenet-username').innerHTML = username;
+    document.getElementById('coffeenet-header').innerHTML = Navbar ({ username });
     addApps(apps, 'coffeenet-apps');
 });
 

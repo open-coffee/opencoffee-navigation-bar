@@ -3,7 +3,9 @@ import { html } from 'common-tags'
 import styles from './navbar.css'
 
 
-export default function navbar () {
+export default function navbar ({
+    username
+}) {
     return html`
         <div class="${styles.header}">
             <nav class="navbar navbar-default">
@@ -40,7 +42,7 @@ export default function navbar () {
                         <ul class="nav navbar-nav navbar-right">
                             <li class="navbar-text hidden-xs">
                                 <span id="coffeenet-username">
-                                    <!-- render by javascript -->
+                                    ${username}
                                 </span>
                             </li>
                         </ul>
