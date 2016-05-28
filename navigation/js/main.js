@@ -1,5 +1,5 @@
 
-import { GET_JSON } from 'coffee-fetch';
+import { GET, GET_JSON } from 'coffee-fetch';
 import Navbar from './Navbar'
 
 
@@ -25,6 +25,13 @@ let fetchApps = GET_JSON('/coffeenet/apps')
         return Promise.resolve([
             {name: 'Could not receive CoffeeNet applications', url: ''}
         ]);
+    });
+
+GET ('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
+    .then (function attachCSS (css) {
+        const style = document.createElement ('style');
+        style.innerHTML = css;
+        document.querySelector ('head').appendChild (style);
     });
 
 
