@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require ('extract-text-webpack-plugin');
 
-var inputPath = path.resolve(__dirname, 'navigation/js');
+var inputPath = path.resolve(__dirname, 'navigation');
 var outputPath = path.resolve(__dirname, 'src/main/resources');
 
 module.exports = {
@@ -21,8 +22,19 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract (
+                    'style-loader',
+                    'css-loader?modules'
+                )
+            },
+            {
+                test: /\.jpg|png|svg|gif/,
+                loader: 'url'
+            },
+            {
+                test: /\.js$/,
+                include: path.resolve (__dirname, 'navigation'),
                 loader: 'babel',
                 query: {
                     presets: ['es2015']
@@ -35,6 +47,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             include: /\.min\.js$/,
             minimize: true
-        })
+        }),
+        new ExtractTextPlugin ('css/navigation.css')
     ]
 };
