@@ -43,7 +43,9 @@ export default function navbar ({
                         <ul class="nav navbar-nav navbar-right">
                             <li class="navbar-text hidden-xs">
                                 <span id="coffeenet-username">
-                                    ${username}
+                                    <a href="https://profile.synyx.coffee" title="CoffeeNet Profile">
+                                        ${username}
+                                    </a>
                                 </span>
                             </li>
                         </ul>
