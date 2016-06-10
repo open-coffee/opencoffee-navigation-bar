@@ -1,6 +1,5 @@
-
-import { GET, GET_JSON } from 'coffee-fetch';
-import Navbar from './Navbar/Navbar'
+import {GET, GET_JSON} from 'coffee-fetch';
+import Navbar from './Navbar/Navbar';
 
 
 let fetchUsername = GET_JSON('/coffeenet/user')
@@ -27,20 +26,20 @@ let fetchApps = GET_JSON('/coffeenet/apps')
         ]);
     });
 
-GET ('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
-    .then (function attachCSS (css) {
-        const style = document.createElement ('style');
+GET('/webjars/@project.artifactId@/css/navigation.css', {Accept: 'text/css'})
+    .then(function attachCSS(css) {
+        const style = document.createElement('style');
         style.innerHTML = css;
-        document.querySelector ('head').appendChild (style);
+        document.querySelector('head').appendChild(style);
     });
 
 
 Promise.all([
     fetchUsername,
     fetchApps
-]).then (values => {
+]).then(values => {
     const [username, apps] = values;
-    document.getElementById('coffeenet-header').innerHTML = Navbar ({ username, apps });
+    document.getElementById('coffeenet-header').innerHTML = Navbar({username, apps});
 });
 
 

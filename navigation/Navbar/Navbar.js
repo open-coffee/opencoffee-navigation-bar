@@ -1,9 +1,7 @@
+import {html} from 'common-tags';
+import styles from './navbar.css';
 
-import { html } from 'common-tags'
-import styles from './navbar.css'
-
-
-export default function navbar ({
+export default function navbar({
     username,
     apps = []
 }) {
@@ -29,7 +27,7 @@ export default function navbar ({
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                    aria-expanded="false">Applications <span class="caret"></span></a>
                                 <ul id="coffeenet-apps" class="dropdown-menu">
-                                    ${apps.map (app => `<li><a href="${app.url}">${app.name}</a></li>`)}
+                                    ${apps.map(app => `<li><a href="${app.url}">${app.name}</a></li>`)}
                                 </ul>
                             </li>
                         </ul>
