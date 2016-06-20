@@ -1,7 +1,8 @@
+/* eslint new-cap: ["error", { "capIsNewExceptions": ["GET", "GET_JSON"] }] */
 
 import 'whatwg-fetch'
 import { GET, GET_JSON } from 'coffee-fetch';
-import Navbar from './Navbar/Navbar';
+import navbar from './Navbar/Navbar';
 
 
 const fetchUsername = GET_JSON('/coffeenet/user')
@@ -41,7 +42,7 @@ Promise.all([
     fetchApps,
 ]).then(values => {
     const [username, apps] = values;
-    document.getElementById('coffeenet-header').innerHTML = Navbar({ username, apps });
+    document.getElementById('coffeenet-header').innerHTML = navbar({ username, apps });
 });
 
 
