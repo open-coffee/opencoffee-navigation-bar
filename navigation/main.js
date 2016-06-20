@@ -4,12 +4,12 @@ import { GET, GET_JSON } from 'coffee-fetch';
 import Navbar from './Navbar/Navbar';
 
 
-let fetchUsername = GET_JSON('/coffeenet/user')
+const fetchUsername = GET_JSON('/coffeenet/user')
     .then(user => user.username);
 
-let fetchApps = GET_JSON('/coffeenet/apps')
+const fetchApps = GET_JSON('/coffeenet/apps')
     .then(data => {
-        let apps = [].slice.call(data);
+        const apps = [].slice.call(data);
 
         if (apps.length === 0) {
             console.info('CoffeeNet: No application discovered');
@@ -46,7 +46,7 @@ Promise.all([
 
 
 function compareByName(a, b) {
-    let nameA = a.name.toLowerCase();
-    let nameB = b.name.toLowerCase();
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
     return nameA.localeCompare(nameB);
 }
