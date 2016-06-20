@@ -1,6 +1,6 @@
 
 import 'whatwg-fetch'
-import {GET, GET_JSON} from 'coffee-fetch';
+import { GET, GET_JSON } from 'coffee-fetch';
 import Navbar from './Navbar/Navbar';
 
 
@@ -14,7 +14,7 @@ let fetchApps = GET_JSON('/coffeenet/apps')
         if (apps.length === 0) {
             console.info('CoffeeNet: No application discovered');
             return [
-                {name: 'No other applications registered', url: ''}
+                { name: 'No other applications registered', url: '' },
             ];
         }
 
@@ -24,11 +24,11 @@ let fetchApps = GET_JSON('/coffeenet/apps')
     .catch((err) => {
         console.info('CoffeeNet: Could not receive discovered applications', err);
         return Promise.resolve([
-            {name: 'Could not receive CoffeeNet applications', url: ''}
+            { name: 'Could not receive CoffeeNet applications', url: '' },
         ]);
     });
 
-GET('/webjars/@project.artifactId@/css/navigation.css', {Accept: 'text/css'})
+GET('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
     .then(function attachCSS(css) {
         const style = document.createElement('style');
         style.innerHTML = css;
@@ -38,10 +38,10 @@ GET('/webjars/@project.artifactId@/css/navigation.css', {Accept: 'text/css'})
 
 Promise.all([
     fetchUsername,
-    fetchApps
+    fetchApps,
 ]).then(values => {
     const [username, apps] = values;
-    document.getElementById('coffeenet-header').innerHTML = Navbar({username, apps});
+    document.getElementById('coffeenet-header').innerHTML = Navbar({ username, apps });
 });
 
 
