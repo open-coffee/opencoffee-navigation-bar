@@ -3,9 +3,9 @@
   "private": true,
   "description": "",
   "scripts": {
-    "postinstall": "npm run linting && npm run build",
+    "postinstall": "npm run lint && npm run build",
     "build": "webpack",
-    "linting": "./node_modules/eslint/bin/eslint.js navigation/**; true"
+    "lint": "eslint navigation/"
   },
   "author": "Tobias Schneider <schneider@synyx.de>",
   "devDependencies": {
@@ -15,7 +15,10 @@
     "coffee-fetch": "git+ssh://git@gitlab-test.synyx.coffee:coffeenet/coffee-fetch.git#v0.1.0",
     "common-tags": "1.1.1",
     "css-loader": "0.23.1",
-    "eslint": "2.7.0",
+    "eslint": "2.11.1",
+    "eslint-config-airbnb-base": "3.0.1",
+    "eslint-config-synyx-base": "0.1.0",
+    "eslint-plugin-import": "1.8.1",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
     "style-loader": "0.13.1",
