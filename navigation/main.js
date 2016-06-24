@@ -1,3 +1,5 @@
+
+import 'whatwg-fetch'
 import {GET, GET_JSON} from 'coffee-fetch';
 import Navbar from './Navbar/Navbar';
 
