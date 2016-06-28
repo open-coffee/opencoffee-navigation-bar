@@ -1,9 +1,9 @@
-import {html} from 'common-tags';
+import { html } from 'common-tags';
 import styles from './navbar.css';
 
 export default function navbar({
     username,
-    apps = []
+    apps = [],
 }) {
     return html`
         <div class="${styles.header}">
