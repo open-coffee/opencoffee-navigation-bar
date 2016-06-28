@@ -3,9 +3,5 @@
     "synyx-base"
   ],
   "rules": {
-    "prefer-arrow-callback": ["error", {
-      "allowNamedFunctions": true,
-      "allowUnboundThis": true
-    }]
   }
 }
