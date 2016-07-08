@@ -17,15 +17,19 @@ export default function navbar({
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="https://synyx.coffee" title="CoffeeNet Frontpage"><i class="${styles.logo}">Synyx Logo</i></a>
+                        <a href="https://synyx.coffee" title="CoffeeNet Frontpage">
+                            <i class="${styles.logo}">Synyx Logo</i>
+                        </a>
                     </div>
             
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="coffeenet-navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                   aria-expanded="false">Applications <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                                    aria-haspopup="true" aria-expanded="false">
+                                    Applications <span class="caret"></span>
+                                </a>
                                 <ul id="coffeenet-apps" class="dropdown-menu">
                                     ${apps.map(app => `<li><a href="${app.url}">${app.name}</a></li>`)}
                                 </ul>
