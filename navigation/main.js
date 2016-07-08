@@ -30,7 +30,7 @@ const fetchApps = GET_JSON('/coffeenet/apps')
     });
 
 GET('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
-    .then(function attachCSS(css) {
+    .then(css => {
         const style = document.createElement('style');
         style.innerHTML = css;
         document.querySelector('head').appendChild(style);
