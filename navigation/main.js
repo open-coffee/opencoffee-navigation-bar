@@ -1,6 +1,6 @@
 /* eslint new-cap: ["error", { "capIsNewExceptions": ["GET", "GET_JSON"] }] */
 
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import { GET, GET_JSON } from 'coffee-fetch';
 import navbar from './Navbar/Navbar';
 
