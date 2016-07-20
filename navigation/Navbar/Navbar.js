@@ -28,7 +28,7 @@ export default function navbar({
                 </li>
                 <li>
                     <form action="/logout" method="post"> 
-                        <button type="submit" id="logout-link" class="${styles.buttonLogout}"> 
+                        <button type="submit" class="${styles.buttonLogout}"> 
                             Logout
                         </button> 
                     </form>
