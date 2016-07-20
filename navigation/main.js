@@ -47,7 +47,7 @@ Promise.all([
     header.classList.add(styles.headerContainer);
     header.innerHTML = navbar({ username, apps });
     document.getElementById('coffee-nav-hamburger').addEventListener('click', () => {
-        header.classList.toggle(styles.hidden);
+        header.classList.toggle(styles.visible);
     });
 });
 

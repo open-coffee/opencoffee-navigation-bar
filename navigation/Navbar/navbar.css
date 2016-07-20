@@ -21,9 +21,10 @@
     background-position: bottom left;
     background-repeat: no-repeat;
     transition: margin cubic-bezier(0.47, 0, 0.75, 0.72) 450ms;
-}
-.headerContainer.hidden {
     margin-left: -115px;
+}
+.headerContainer.visible {
+    margin-left: 0px;
 }
 
 .hamburger {
@@ -61,19 +62,19 @@
 }
 
 
-/*:global #nav-hamburger:checked ~ label span {*/
-    /*background-color: transparent;*/
-/*}*/
-/*:global #nav-hamburger:checked ~ label span::before, :global #nav-hamburger:checked ~ label span::after {*/
-    /*margin-top: 0px;*/
-    /*transition-delay: 0, 0.2s;*/
-/*}*/
-/*:global #nav-hamburger:checked ~ label span::before {*/
-    /*transform: rotate(45deg);*/
-/*}*/
-/*:global #nav-hamburger:checked ~ label span::after {*/
-    /*transform: rotate(-45deg);*/
-/*}*/
+.headerContainer.visible .hamburger span{
+    background-color: transparent;
+}
+.headerContainer.visible .hamburger span::before, .headerContainer.visible .hamburger span::after {
+    margin-top: 0px;
+    transition-delay: 0, 0.2s;
+}
+.headerContainer.visible .hamburger span::before {
+    transform: rotate(45deg);
+}
+.headerContainer.visible .hamburger span::after {
+    transform: rotate(-45deg);
+}
 
 
 .personalisationContainer {
