@@ -6,10 +6,9 @@ export default function navbar({
     apps = [],
 }) {
     return html`
-        <input type="checkbox" id="nav-hamburger"/>
-        <label class="${styles.hamburger}" for="nav-hamburger">
-          <span></span>
-        </label>
+        <div id="coffee-nav-hamburger" class="${styles.hamburger}">
+            <span></span>
+        </div>
         <div class="${styles.personalisationContainer}">
             <div class="${styles.avatarCircleOuter}">
                 <div class="${styles.avatarCircleInner}">

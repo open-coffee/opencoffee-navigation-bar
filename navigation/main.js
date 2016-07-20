@@ -3,6 +3,7 @@
 import 'whatwg-fetch';
 import { GET, GET_JSON } from 'coffee-fetch';
 import navbar from './Navbar/Navbar';
+import styles from './Navbar/navbar.css';
 
 
 const fetchUsername = GET_JSON('/coffeenet/user')
@@ -42,7 +43,12 @@ Promise.all([
     fetchApps,
 ]).then(values => {
     const [username, apps] = values;
-    document.getElementById('coffeenet-header').innerHTML = navbar({ username, apps });
+    const header = document.getElementById('coffeenet-header');
+    header.classList.add(styles.headerContainer);
+    header.innerHTML = navbar({ username, apps });
+    document.getElementById('coffee-nav-hamburger').addEventListener('click', () => {
+        header.classList.toggle(styles.hidden);
+    });
 });
 
 
