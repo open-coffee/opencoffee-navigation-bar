@@ -29,13 +29,11 @@ export default function navbar({
                 <li>
                     <a href="https://profile.synyx.coffee">Profil</a>
                 </li>
-                <li>
-                    <form action="/logout" method="post"> 
-                        <button type="submit" class="${styles.buttonLogout}"> 
-                            Logout
-                        </button> 
-                    </form>
-                </li>
             </ul>
+            <form action="/logout" method="post"> 
+                <button type="submit" class="${styles.buttonLogout}"> 
+                    Logout
+                </button> 
+            </form>
         </nav>`;
 }
