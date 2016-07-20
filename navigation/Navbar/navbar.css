@@ -62,20 +62,6 @@
 }
 
 
-.headerContainer.visible .hamburger span{
-    background-color: transparent;
-}
-.headerContainer.visible .hamburger span::before, .headerContainer.visible .hamburger span::after {
-    margin-top: 0px;
-    transition-delay: 0, 0.2s;
-}
-.headerContainer.visible .hamburger span::before {
-    transform: rotate(45deg);
-}
-.headerContainer.visible .hamburger span::after {
-    transform: rotate(-45deg);
-}
-
 
 .personalisationContainer {
     margin-top: 40px;
@@ -140,4 +126,66 @@
 .buttonLogout:focus, .buttonLogout:hover {
     color: #23527c;
     text-decoration: underline;
+}
+
+
+.headerContainer.visible .hamburger span{
+    background-color: transparent;
+}
+.headerContainer.visible .hamburger span::before, .headerContainer.visible .hamburger span::after {
+    margin-top: 0px;
+    transition-delay: 0, 0.2s;
+}
+.headerContainer.visible .hamburger span::before {
+    transform: rotate(45deg);
+}
+.headerContainer.visible .hamburger span::after {
+    transform: rotate(-45deg);
+}
+
+
+
+@media screen and (min-width: 440px) {
+    /*
+        styling is for smaller devices by default
+        so we have to swap styling (by class names) on larger devices
+        small device: navbar should be hidden by default
+        big device: navbar should be visible by default
+        clicking hamburger toggles the `.visible` class which actually means hide me on a big screen
+     */
+    .headerContainer.visible {
+        margin-left: -115px;
+    }
+    .headerContainer:not(.visible) {
+        margin-left: 0px;
+    }
+
+    .headerContainer:not(.visible) .hamburger span {
+        background-color: transparent;
+    }
+    .headerContainer:not(.visible) .hamburger span::before,
+    .headerContainer:not(.visible) .hamburger span::after {
+        margin-top: 0px;
+        transition-delay: 0, 0.2s;
+    }
+    .headerContainer:not(.visible) .hamburger span::before {
+        transform: rotate(45deg);
+    }
+    .headerContainer:not(.visible) .hamburger span::after {
+        transform: rotate(-45deg);
+    }
+
+    .headerContainer.visible .hamburger span {
+        background-color: #525252;
+    }
+    .headerContainer.visible .hamburger span::before {
+        transition-delay: 0s;
+        transform: rotate(0deg);
+        margin-top: -6px;
+    }
+    .headerContainer.visible .hamburger span::after {
+        transition-delay: 0s;
+        transform: rotate(0deg);
+        margin-top: 6px;
+    }
 }

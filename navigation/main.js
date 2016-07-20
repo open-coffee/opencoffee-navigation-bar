@@ -45,7 +45,6 @@ Promise.all([
     const [username, apps] = values;
     const header = document.getElementById('coffeenet-header');
     header.classList.add(styles.headerContainer);
-    header.classList.add(styles.visible);
     header.innerHTML = navbar({ username, apps });
     document.getElementById('coffee-nav-hamburger').addEventListener('click', () => {
         header.classList.toggle(styles.visible);
