@@ -6,53 +6,20 @@ export default function navbar({
     apps = [],
 }) {
     return html`
-        <div class="${styles.header}">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#coffeenet-navbar-collapse" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a href="https://synyx.coffee" title="CoffeeNet Frontpage">
-                            <i class="${styles.logo}">Synyx Logo</i>
-                        </a>
-                    </div>
-            
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="coffeenet-navbar-collapse">
-                        <ul class="nav navbar-nav navbar-left">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Applications <span class="caret"></span>
-                                </a>
-                                <ul id="coffeenet-apps" class="dropdown-menu">
-                                    ${apps.map(app => `<li><a href="${app.url}">${app.name}</a></li>`)}
-                                </ul>
-                            </li>
-                        </ul>
-            
-                        <form class="navbar-form navbar-right" action="/logout" method="post">
-                            <button class="btn btn-link" type="submit" id="logout-link">
-                                <span class="glyphicon glyphicon-log-out"></span>
-                                Logout
-                            </button>
-                        </form>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="navbar-text hidden-xs">
-                                <span id="coffeenet-username">
-                                    <a href="https://profile.synyx.coffee" title="CoffeeNet Profile">
-                                        ${username}
-                                    </a>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
+        <div class="${styles.personalisationContainer}">
+            <div class="${styles.avatarCircleOuter}">
+                <div class="${styles.avatarCircleInner}">
+                    <div class="${styles.avatar}"></div>
                 </div>
-            </nav>
-        </div>`;
+            </div>
+            <h2 class="${styles.username}">
+                ${username}
+            </h2>
+        </div>
+        <nav class="${styles.navigationContainer}">
+            <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
+            <ul class="${styles.navSectionList}">
+                ${apps.map(app => `<li><a href="${app.url}">${app.name}</a></li>`)}
+            </ul>
+        </nav>`;
 }
