@@ -6,7 +6,6 @@ export default function navbar({
     apps = [],
 }) {
     return html`
-    <div>
         <div class="${styles.personalisationContainer}">
             <div class="${styles.avatarCircleOuter}">
                 <div class="${styles.avatarCircleInner}">
@@ -35,6 +34,5 @@ export default function navbar({
                     </form>
                 </li>
             </ul>
-        </nav>
-    </div>`;
+        </nav>`;
 }
