@@ -14,8 +14,8 @@
 .headerContainer {
     min-height: 100%;
     padding: 20px;
-    box-shadow: 0px 0px 0.2em #757575;
-    background-color: #ebebeb;
+    box-shadow: 0 0 5px #9E9E9E;
+    background-color: #EEEEEE;
     background-image: url('./synyx-logo.png');
     background-attachment: fixed;
     background-position: bottom left;
@@ -112,6 +112,19 @@
 
 .navSectionList {
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.navSectionList > li {
+    transition: background-color ease 150ms;
+}
+.navSectionList > li > a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+}
+.navSectionList > li:hover {
+    background-color: #E0E0E0;
 }
 
 .buttonLogout {
