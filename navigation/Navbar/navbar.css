@@ -20,11 +20,10 @@
     background-attachment: fixed;
     background-position: bottom left;
     background-repeat: no-repeat;
-    transition: margin cubic-bezier(0.47, 0, 0.75, 0.72) 450ms;
-    margin-left: -115px;
+    width: 65px;
 }
 .headerContainer.visible {
-    margin-left: 0px;
+    width: 380px;
 }
 
 .hamburger {
@@ -66,7 +65,9 @@
 .personalisationContainer {
     margin-top: 40px;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .avatarCircleOuter,
@@ -96,7 +97,7 @@
 }
 
 .username {
-    margin: 0 0 0 20px;
+    margin: 10px 0 0 0;
     padding: 0;
     font-size: 1.5em;
 }
@@ -162,6 +163,11 @@
 }
 
 
+.headerContainer:not(.visible) .avatarCircleOuter {
+    width: 33px;
+    heights: 33px;
+}
+
 
 @media screen and (min-width: 440px) {
     /*
@@ -172,10 +178,31 @@
         clicking hamburger toggles the `.visible` class which actually means hide me on a big screen
      */
     .headerContainer.visible {
-        margin-left: -115px;
+        width: 65px;
     }
     .headerContainer:not(.visible) {
-        margin-left: 0px;
+        width: 380px;
+    }
+
+    .headerContainer.visible .avatarCircleOuter {
+        width: 33px;
+        height: 33px;
+    }
+    .headerContainer:not(.visible) .avatarCircleOuter {
+        width: 60px;
+        height: 60px;
+    }
+    .headerContainer.visible .username {
+        display: none;
+    }
+    .headerContainer:not(.visible) .username {
+        display: block;
+    }
+    .headerContainer.visible nav {
+        display: none;
+    }
+    .headerContainer:not(.visible) nav {
+        display: block;
     }
 
     .headerContainer:not(.visible) .hamburger span {
