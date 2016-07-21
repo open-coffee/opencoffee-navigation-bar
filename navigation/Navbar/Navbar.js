@@ -19,7 +19,7 @@ export default function navbar({
                 ${username}
             </h2>
         </div>
-        <nav class="${styles.navigationContainer}">
+        <nav>
             <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
             <ul class="${styles.navSectionList}">
                 ${apps.map(app => `<li><a href="${app.url}">${app.name}</a></li>`)}
