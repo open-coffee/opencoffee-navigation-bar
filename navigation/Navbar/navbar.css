@@ -77,8 +77,8 @@
     background-color: white;
 }
 .avatarCircleOuter {
-    width: 60px;
-    height: 60px;
+    width: 33px;
+    height: 33px;
     display: flex;
     align-items: center;
     align-content: center;
@@ -100,6 +100,15 @@
     margin: 10px 0 0 0;
     padding: 0;
     font-size: 1.5em;
+}
+
+.username,
+.headerContainer nav {
+    display: none;
+}
+.headerContainer.visible .username,
+.headerContainer.visible nav {
+    display: block;
 }
 
 
@@ -160,12 +169,6 @@
 }
 .headerContainer.visible .hamburger span::after {
     transform: rotate(-45deg);
-}
-
-
-.headerContainer:not(.visible) .avatarCircleOuter {
-    width: 33px;
-    heights: 33px;
 }
 
 
