@@ -11,11 +11,6 @@
     min-height: 100%;
 }
 
-.emptyAppListTeaser {
-    font-size: 0.8em;
-    color: #525252;
-}
-
 .headerContainer {
     flex: 1 0 auto; /* (grow = yes, shrink = no, basis: auto) */
     min-height: 100%;

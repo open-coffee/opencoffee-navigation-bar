@@ -10,14 +10,12 @@ export default function navbar({
         `<li><a href="${app.url}">${app.name}</a></li>`
     ));
 
-    const appListItems = apps.length === 0
-            ? [`<li><span class="${styles.emptyAppListTeaser}">keine Anwendungen verf&uuml;gbar</span></li>`,
-               `<li><span class="${styles.emptyAppListTeaser}">take a coffee break</span></li>`]
-            : apps.map(app => (
-                `<li>
-                   <a href="${app.url}">${app.name}</a>
-                   <span><i class="${styles.favstar}" data-app="${app.name}">⭐</i></span>
-                 </li>`));
+    const appListItems = apps.map(app => (
+        `<li>
+           <a href="${app.url}">${app.name}</a>
+           <span><i class="${styles.favstar}" data-app="${app.name}">⭐</i></span>
+         </li>`)
+    );
 
     return html`
         <div id="coffee-nav-hamburger" class="${styles.hamburger}">
@@ -30,14 +28,18 @@ export default function navbar({
             </h2>
         </div>
         <nav id="coffe-nav">
-            <h2 class="${styles.navSectionTitle}">Favoriten</h2>
-            <ul class="${styles.navSectionList}">
-                ${favoriteListItems}    
-            </ul>
-            <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
-            <ul class="${styles.navSectionList}">
-                ${appListItems}    
-            </ul>
+            ${favoriteListItems.length === 0 ? '' : (html`
+                <h2 class="${styles.navSectionTitle}">Favoriten</h2>
+                <ul class="${styles.navSectionList}">
+                    ${favoriteListItems}    
+                </ul>
+            `)}
+            ${appListItems.length === 0 ? '' : (html`
+                <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
+                <ul class="${styles.navSectionList}">
+                    ${appListItems}    
+                </ul>
+            `)}
             <h2 class="${styles.navSectionTitle}">Einstellungen</h2>
             <ul class="${styles.navSectionList}">
                 <li>
