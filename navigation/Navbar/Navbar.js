@@ -10,11 +10,7 @@ export default function navbar({
             <span></span>
         </div>
         <div class="${styles.personalisationContainer}">
-            <div class="${styles.avatarCircleOuter}">
-                <div class="${styles.avatarCircleInner}">
-                    <div class="${styles.avatar}"></div>
-                </div>
-            </div>
+            <div id="coffee-nav-user-avatar" class="${styles.avatar}"></div>
             <h2 class="${styles.username}">
                 ${username}
             </h2>

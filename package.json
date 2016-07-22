@@ -32,5 +32,8 @@
     "presets": [
       "es2015"
     ]
+  },
+  "dependencies": {
+    "gravatar-url": "^1.1.0"
   }
 }

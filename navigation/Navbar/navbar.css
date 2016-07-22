@@ -71,34 +71,23 @@
     text-align: center;
 }
 
-.avatarCircleOuter,
-.avatarCircleInner {
+.avatar {
     border: 1px solid #C1C1C1;
     border-radius: 100%;
     background-color: white;
+    padding: 2px;
 }
-.avatarCircleOuter {
+.avatar img {
+    border-radius: 100%;
     width: 33px;
     height: 33px;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
 }
-.avatarCircleInner {
-    width: calc(100% - 6px);
-    height: calc(100% - 6px);
+.headerContainer.visible .avatar {
+    padding: 5px;
 }
-.avatar {
-    background: url('./user_avatar.jpg') no-repeat;
-    background-size: 100% 100%;
-    border-radius: 100%;
-    width: 100%;
-    height: 100%;
-}
-.headerContainer.visible .avatarCircleOuter {
-    width: 80px;
-    height: 80px;
+.headerContainer.visible .avatar img {
+    width: 64px;
+    height: 64px;
 }
 
 .username {
@@ -192,14 +181,21 @@
         width: 200px;
     }
 
-    .headerContainer.visible .avatarCircleOuter {
+    .headerContainer.visible .avatar {
+        padding: 2px;
+    }
+    .headerContainer:not(.visible) .avatar {
+        padding: 5px;
+    }
+    .headerContainer.visible .avatar img {
         width: 33px;
         height: 33px;
     }
-    .headerContainer:not(.visible) .avatarCircleOuter {
-        width: 80px;
-        height: 80px;
+    .headerContainer:not(.visible) .avatar img {
+        width: 64px;
+        height: 64px;
     }
+
     .headerContainer.visible .username {
         display: none;
     }

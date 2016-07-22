@@ -2,6 +2,7 @@
 
 import 'whatwg-fetch';
 import { GET, GET_JSON } from 'coffee-fetch';
+import gravatarUrl from 'gravatar-url';
 import navbar from './Navbar/Navbar';
 import styles from './Navbar/navbar.css';
 
@@ -49,8 +50,28 @@ Promise.all([
     document.getElementById('coffee-nav-hamburger').addEventListener('click', () => {
         header.classList.toggle(styles.visible);
     });
+
+    const avatarImg = document.createElement('img');
+    avatarImg.src = gravatarUrl(guessEmail(username), { size: 64 });
+    avatarImg.onError = function avatarFetchError() {
+        avatarImg.src = ''; // TODO copy anon_img in dist and set as src
+    };
+    document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
 });
 
+function guessEmail(name) {
+    const parts = name.split(/\s+/);
+    const lastname = parts[parts.length - 1];
+    const lastnameEscaped = withoutUmlauts(lastname);
+    return `${lastnameEscaped}@synyx.de`;
+}
+
+function withoutUmlauts(string) {
+    return string
+        .replace(/ä/g, 'ae')
+        .replace(/ö/g, 'oe')
+        .replace(/ü/g, 'ue');
+}
 
 function compareByName(a, b) {
     const nameA = a.name.toLowerCase();
