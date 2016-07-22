@@ -31,21 +31,24 @@ Promise.all([
 ]).then(values => {
     const [username, apps] = values;
     const header = document.getElementById('coffeenet-header');
+
+    var myApps = [...apps];
+    var myFavs = [];
+
     header.classList.add(styles.headerContainer);
-    header.innerHTML = navbar({ username, apps });
     header.addEventListener('click', event => {
         const { target } = event;
         if (target.id === 'coffee-nav-hamburger') {
             header.classList.toggle(styles.visible);
         }
+        else if (target.dataset.app) {
+            myFavs = [...myFavs, myApps.find(app => app.name === target.dataset.app)];
+            myApps = [...myApps].filter(app => app.name !== target.dataset.app);
+            render({ username, apps: myApps, favorites: myFavs });
+        }
     });
 
-    const avatarImg = document.createElement('img');
-    avatarImg.src = gravatarUrl(guessEmail(username), { size: 64 });
-    avatarImg.onError = function avatarFetchError() {
-        avatarImg.src = ''; // TODO copy anon_img in dist and set as src
-    };
-    document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
+    render({ username, apps });
 });
 
 function guessEmail(name) {
@@ -66,4 +69,20 @@ function compareByName(a, b) {
     const nameA = a.name.toLowerCase();
     const nameB = b.name.toLowerCase();
     return nameA.localeCompare(nameB);
+}
+
+function render({
+    apps = [],
+    favorites = [],
+    username,
+}) {
+    const html = navbar({ username, apps, favorites });
+    document.getElementById('coffeenet-header').innerHTML = html;
+
+    const avatarImg = document.createElement('img');
+    avatarImg.src = gravatarUrl(guessEmail(username), { size: 64 });
+    avatarImg.onError = function avatarFetchError() {
+        avatarImg.src = ''; // TODO copy anon_img in dist and set as src
+    };
+    document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
 }

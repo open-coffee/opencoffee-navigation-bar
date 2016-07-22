@@ -2,8 +2,9 @@ import { html } from 'common-tags';
 import styles from './navbar.css';
 
 export default function navbar({
-    username,
+    username = '',
     apps = [],
+    favorites = [],
 }) {
     return html`
         <div id="coffee-nav-hamburger" class="${styles.hamburger}">
@@ -15,7 +16,16 @@ export default function navbar({
                 ${username}
             </h2>
         </div>
-        <nav>
+        <nav id="coffe-nav">
+            <h2 class="${styles.navSectionTitle}">Favoriten</h2>
+            <ul class="${styles.navSectionList}">
+                ${favorites.length === 0
+                    ? ''
+                    : favorites.map(app => (
+                        `<li><a href="${app.url}">${app.name}</a></li>`
+                    ))
+                }    
+            </ul>
             <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
             <ul class="${styles.navSectionList}">
                 ${apps.length === 0
@@ -23,7 +33,9 @@ export default function navbar({
                         `<li><span class="${styles.emptyAppListTeaser}">keine Anwendungen verf&uuml;gbar</span></li>`,
                         `<li><span class="${styles.emptyAppListTeaser}">take a coffee break</span></li>`,
                       ]
-                    : apps.map(app => `<li><a href="${app.url}">${app.name}</a></li>`)
+                    : apps.map(app => (
+                        `<li><a href="${app.url}">${app.name}</a><span><i class="${styles.favstar}" data-app="${app.name}">⭐</i></span></li>`
+                      ))
                 }    
             </ul>
             <h2 class="${styles.navSectionTitle}">Einstellungen</h2>
