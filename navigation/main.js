@@ -31,21 +31,27 @@ Promise.all([
 ]).then(values => {
     const [username, apps] = values;
     const header = document.getElementById('coffeenet-header');
-
     var myFavs = JSON.parse(localStorage.getItem('coffee::nav::favs') || '[]');
     var myApps = apps.filter(app => !myFavs.some(fav => fav.name === app.name));
 
+    function handleHamburgerClick() {
+        header.classList.toggle(styles.visible);
+    }
+
+    function handleFavClick(event) {
+        myFavs = [...myFavs, myApps.find(app => app.name === event.target.dataset.app)];
+        myApps = [...myApps].filter(app => app.name !== event.target.dataset.app);
+        localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
+        render({ username, apps: myApps, favorites: myFavs });
+    }
+
     header.classList.add(styles.headerContainer);
     header.addEventListener('click', event => {
-        const { target } = event;
-        if (target.id === 'coffee-nav-hamburger') {
-            header.classList.toggle(styles.visible);
+        if (event.target.id === 'coffee-nav-hamburger') {
+            handleHamburgerClick();
         }
-        else if (target.dataset.app) {
-            myFavs = [...myFavs, myApps.find(app => app.name === target.dataset.app)];
-            myApps = [...myApps].filter(app => app.name !== target.dataset.app);
-            localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
-            render({ username, apps: myApps, favorites: myFavs });
+        else if (event.target.dataset.app) {
+            handleFavClick(event);
         }
     });
 
