@@ -82,6 +82,16 @@
     width: 33px;
     height: 33px;
 }
+.avatar img:hover {
+    animation: SPIN 2s infinite;
+    transform: rotateY( -226deg );
+}
+
+@keyframes SPIN {
+    0%   { transform: rotateY(0deg)   }
+    100% { transform: rotateY(360deg) }
+}
+
 .headerContainer.visible .avatar {
     padding: 5px;
 }
