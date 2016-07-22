@@ -32,8 +32,8 @@ Promise.all([
     const [username, apps] = values;
     const header = document.getElementById('coffeenet-header');
 
-    var myApps = [...apps];
-    var myFavs = [];
+    var myFavs = JSON.parse(localStorage.getItem('coffee::nav::favs') || '[]');
+    var myApps = apps.filter(app => !myFavs.some(fav => fav.name === app.name));
 
     header.classList.add(styles.headerContainer);
     header.addEventListener('click', event => {
@@ -44,11 +44,12 @@ Promise.all([
         else if (target.dataset.app) {
             myFavs = [...myFavs, myApps.find(app => app.name === target.dataset.app)];
             myApps = [...myApps].filter(app => app.name !== target.dataset.app);
+            localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
             render({ username, apps: myApps, favorites: myFavs });
         }
     });
 
-    render({ username, apps });
+    render({ username, apps: myApps, favorites: myFavs });
 });
 
 function guessEmail(name) {
