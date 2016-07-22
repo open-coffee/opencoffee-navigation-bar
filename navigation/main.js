@@ -11,24 +11,10 @@ const fetchUsername = GET_JSON('/coffeenet/user')
     .then(user => user.username);
 
 const fetchApps = GET_JSON('/coffeenet/apps')
-    .then(data => {
-        const apps = [].slice.call(data);
-
-        if (apps.length === 0) {
-            console.info('CoffeeNet: No application discovered');
-            return [
-                { name: 'No other applications registered', url: '' },
-            ];
-        }
-
-        apps.sort(compareByName);
-        return apps;
-    })
+    .then(apps => [...apps].sort(compareByName))
     .catch((err) => {
         console.info('CoffeeNet: Could not receive discovered applications', err);
-        return Promise.resolve([
-            { name: 'Could not receive CoffeeNet applications', url: '' },
-        ]);
+        return Promise.resolve([]);
     });
 
 GET('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })

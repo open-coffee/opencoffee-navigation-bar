@@ -11,6 +11,11 @@
     min-height: 100%;
 }
 
+.emptyAppListTeaser {
+    font-size: 0.8em;
+    color: #525252;
+}
+
 .headerContainer {
     flex: 1 0 auto; /* (grow = yes, shrink = no, basis: auto) */
     min-height: 100%;
@@ -129,15 +134,13 @@
     display: flex;
     flex-direction: column;
 }
-.navSectionList > li {
-    transition: background-color ease 150ms;
-}
-.navSectionList > li > a {
+.navSectionList a {
     display: block;
     padding: 5px;
     text-decoration: none;
+    transition: background-color ease 150ms;
 }
-.navSectionList > li:hover {
+.navSectionList a:hover {
     background-color: #E0E0E0;
 }
 
