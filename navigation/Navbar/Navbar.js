@@ -6,6 +6,19 @@ export default function navbar({
     apps = [],
     favorites = [],
 }) {
+    const favoriteListItems = favorites.map(app => (
+        `<li><a href="${app.url}">${app.name}</a></li>`
+    ));
+
+    const appListItems = apps.length === 0
+            ? [`<li><span class="${styles.emptyAppListTeaser}">keine Anwendungen verf&uuml;gbar</span></li>`,
+               `<li><span class="${styles.emptyAppListTeaser}">take a coffee break</span></li>`]
+            : apps.map(app => (
+                `<li>
+                   <a href="${app.url}">${app.name}</a>
+                   <span><i class="${styles.favstar}" data-app="${app.name}">⭐</i></span>
+                 </li>`));
+
     return html`
         <div id="coffee-nav-hamburger" class="${styles.hamburger}">
             <span></span>
@@ -19,24 +32,11 @@ export default function navbar({
         <nav id="coffe-nav">
             <h2 class="${styles.navSectionTitle}">Favoriten</h2>
             <ul class="${styles.navSectionList}">
-                ${favorites.length === 0
-                    ? ''
-                    : favorites.map(app => (
-                        `<li><a href="${app.url}">${app.name}</a></li>`
-                    ))
-                }    
+                ${favoriteListItems}    
             </ul>
             <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
             <ul class="${styles.navSectionList}">
-                ${apps.length === 0
-                    ? [
-                        `<li><span class="${styles.emptyAppListTeaser}">keine Anwendungen verf&uuml;gbar</span></li>`,
-                        `<li><span class="${styles.emptyAppListTeaser}">take a coffee break</span></li>`,
-                      ]
-                    : apps.map(app => (
-                        `<li><a href="${app.url}">${app.name}</a><span><i class="${styles.favstar}" data-app="${app.name}">⭐</i></span></li>`
-                      ))
-                }    
+                ${appListItems}    
             </ul>
             <h2 class="${styles.navSectionTitle}">Einstellungen</h2>
             <ul class="${styles.navSectionList}">
