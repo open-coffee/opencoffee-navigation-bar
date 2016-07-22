@@ -39,7 +39,7 @@ Promise.all([
     }
 
     function handleFavClick(event) {
-        myFavs = [...myFavs, myApps.find(app => app.name === event.target.dataset.app)];
+        myFavs = [...myFavs, myApps.find(app => app.name === event.target.dataset.app)].sort(compareByName);
         myApps = [...myApps].filter(app => app.name !== event.target.dataset.app);
         localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
         render({ username, apps: myApps, favorites: myFavs });
