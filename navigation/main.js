@@ -38,6 +38,14 @@ Promise.all([
         header.classList.toggle(styles.visible);
     }
 
+    function handleUnFavClick(event) {
+        const unfavedApp = myFavs.find(fav => fav.name === event.target.dataset.app);
+        myFavs = [...myFavs].filter(fav => fav.name !== event.target.dataset.app);
+        myApps = [...myApps, unfavedApp].sort(compareByName);
+        localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
+        render({ username, apps: myApps, favorites: myFavs });
+    }
+
     function handleFavClick(event) {
         myFavs = [...myFavs, myApps.find(app => app.name === event.target.dataset.app)].sort(compareByName);
         myApps = [...myApps].filter(app => app.name !== event.target.dataset.app);
@@ -49,6 +57,9 @@ Promise.all([
     header.addEventListener('click', event => {
         if (event.target.id === 'coffee-nav-hamburger') {
             handleHamburgerClick();
+        }
+        else if (event.target.dataset.app && event.target.dataset.isFav === 'true') {
+            handleUnFavClick(event);
         }
         else if (event.target.dataset.app) {
             handleFavClick(event);
