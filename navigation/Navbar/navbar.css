@@ -12,6 +12,7 @@
 }
 
 .headerContainer {
+    flex: 1 0 auto; /* (grow = yes, shrink = no, basis: auto) */
     min-height: 100%;
     padding: 20px;
     box-shadow: 0 0 5px #9E9E9E;
@@ -23,7 +24,7 @@
     width: 65px;
 }
 .headerContainer.visible {
-    width: 380px;
+    width: 200px;
 }
 
 .hamburger {
@@ -184,7 +185,7 @@
         width: 65px;
     }
     .headerContainer:not(.visible) {
-        width: 380px;
+        width: 200px;
     }
 
     .headerContainer.visible .avatarCircleOuter {
