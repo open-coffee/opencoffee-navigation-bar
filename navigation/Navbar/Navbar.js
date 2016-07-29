@@ -34,7 +34,7 @@ export default function navbar({
                 </a>
             </h2>
         </div>
-        <nav id="coffe-nav">
+        <nav id="coffe-nav" class="${styles.coffeeNavContainer}">
             ${favoriteListItems.length === 0 ? '' : (html`
                 <h2 class="${styles.navSectionTitle}">Favoriten</h2>
                 <ul class="${styles.navSectionList}">
