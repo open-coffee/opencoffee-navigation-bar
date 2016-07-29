@@ -27,6 +27,23 @@
     width: 200px;
 }
 
+/** style resets **/
+.coffeeNavContainer ul {
+    margin: 0;
+    padding: 0;
+}
+.coffeeNavContainer a {
+    color: #337ab7;
+}
+.coffeeNavContainer a:hover,
+.coffeeNavContainer a:focus,
+.coffeeNavContainer a:active {
+    color: #23527c;
+    text-decoration: underline;
+}
+
+/** hamburger menu **/
+
 .hamburger {
     position: absolute;
     left: 20px;
