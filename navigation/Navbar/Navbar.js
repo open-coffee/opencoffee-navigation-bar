@@ -25,9 +25,13 @@ export default function navbar({
             <span></span>
         </div>
         <div class="${styles.personalisationContainer}">
-            <div id="coffee-nav-user-avatar" class="${styles.avatar}"></div>
+            <div class="${styles.avatar}">
+                <a id="coffee-nav-user-avatar" href="https://profile.synyx.coffee"></a>
+            </div>
             <h2 class="${styles.username}">
-                ${username}
+                <a href="https://profile.synyx.coffee" title="Profile">
+                    ${username}
+                </a>
             </h2>
         </div>
         <nav id="coffe-nav">
