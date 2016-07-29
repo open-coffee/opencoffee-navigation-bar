@@ -55,7 +55,7 @@ Promise.all([
 
     header.classList.add(styles.headerContainer);
     header.addEventListener('click', event => {
-        if (event.target.id === 'coffee-nav-hamburger') {
+        if (event.target.id === 'coffee-nav-hamburger' || event.target.parentNode.id === 'coffee-nav-hamburger') {
             handleHamburgerClick();
         }
         else if (event.target.dataset.app && event.target.dataset.isFav === 'true') {

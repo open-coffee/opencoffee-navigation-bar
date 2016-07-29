@@ -35,6 +35,7 @@
     cursor: pointer;
     height: 21px;
     margin-bottom: 20px;
+    padding-top: 9px;
 }
 .hamburger span,
 .hamburger span::after, .hamburger span::before {
