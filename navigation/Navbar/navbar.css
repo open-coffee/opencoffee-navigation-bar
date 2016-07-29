@@ -137,6 +137,9 @@
 .navSectionList li > a {
     text-decoration: none;
     flex-grow: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .navSectionList li > a,
 .navSectionList li > a + span {
