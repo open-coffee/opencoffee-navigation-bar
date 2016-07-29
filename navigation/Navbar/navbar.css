@@ -12,7 +12,7 @@
 }
 
 .headerContainer {
-    flex: 1 0 auto; /* (grow = yes, shrink = no, basis: auto) */
+    flex: 0 0 auto; /* (grow = no, shrink = no, basis: auto) */
     min-height: 100%;
     padding: 20px;
     box-shadow: 0 0 5px #9E9E9E;
