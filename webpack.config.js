@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require ('extract-text-webpack-plugin');
+var autoprefixer = require ('autoprefixer');
 
 var inputPath = path.resolve(__dirname, 'navigation');
 var outputPath = path.resolve(__dirname, 'src/main/resources');
@@ -23,10 +24,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract (
-                    'style-loader',
-                    'css-loader?modules'
-                )
+                loader: ExtractTextPlugin.extract ('style', ['css?modules', 'postcss'])
             },
             {
                 test: /\.jpg|png|svg|gif/,
@@ -49,5 +47,9 @@ module.exports = {
             minimize: true
         }),
         new ExtractTextPlugin ('css/navigation.css')
-    ]
+    ],
+
+    postcss: function () {
+        return [autoprefixer];
+    }
 };

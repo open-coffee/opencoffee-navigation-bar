@@ -1,21 +1,250 @@
 
-.header {
-    min-height: 70px;
+:global *, :global *::before, :global *::after {
+    box-sizing: border-box;
 }
 
-.logo {
-    color: #1b2a05;
+:global html {
+    height: 100%;
+}
+:global body {
+    display: flex;
+    min-height: 100%;
+}
+
+.headerContainer {
+    flex: 1 0 auto; /* (grow = yes, shrink = no, basis: auto) */
+    min-height: 100%;
+    padding: 20px;
+    box-shadow: 0 0 5px #9E9E9E;
+    background-color: #EEEEEE;
+    background-image: url('./synyx-logo.png');
+    background-attachment: fixed;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    width: 65px;
+}
+.headerContainer.visible {
+    width: 200px;
+}
+
+.hamburger {
+    position: absolute;
+    left: 20px;
+    top: 20px;
     display: block;
-    float: left;
-    padding: 20px 0;
-    height: 50px;
-    width: 85px;
-    line-height: 40px;
+    cursor: pointer;
+    height: 21px;
+    margin-bottom: 20px;
+}
+.hamburger span,
+.hamburger span::after, .hamburger span::before {
+    display: block;
+    width: 25px;
+    height: 4px;
+    background-color: #525252;
+    transition-delay: 0.2s;
+}
+.hamburger span {
+    position: relative;
+    transition-duration: 0;
+}
+.hamburger span::after, .hamburger span::before {
+    display: block;
+    content: '';
+    position: absolute;
+    transition-duration: 0.2s;
+}
+.hamburger span::before {
+    margin-top: -6px;
+}
+.hamburger span::after {
+    margin-top: 6px;
+}
+
+
+
+.personalisationContainer {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.avatar {
+    border: 1px solid #C1C1C1;
+    border-radius: 100%;
+    background-color: white;
+    padding: 2px;
+}
+.avatar img {
+    border-radius: 100%;
+    width: 33px;
+    height: 33px;
+}
+.avatar img:hover {
+    animation: SPIN 2s infinite;
+    transform: rotateY( -226deg );
+}
+
+@keyframes SPIN {
+    0%   { transform: rotateY(0deg)   }
+    100% { transform: rotateY(360deg) }
+}
+
+.headerContainer.visible .avatar {
+    padding: 5px;
+}
+.headerContainer.visible .avatar img {
+    width: 64px;
+    height: 64px;
+}
+
+.username {
+    margin: 10px 0 0 0;
+    padding: 0;
+    font-size: 1.5em;
+}
+
+.username,
+.headerContainer nav {
+    display: none;
+}
+.headerContainer.visible .username,
+.headerContainer.visible nav {
+    display: block;
+}
+
+
+.navSectionTitle {
+    margin: 20px 0 0 0;
+    padding: 0;
+    font-size: 1em;
+    color: #BEBEBE;
+    text-transform: uppercase;
+}
+
+.navSectionList {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.navSectionList > li {
+    transition: background-color ease 150ms;
+}
+.navSectionList > li > a {
+    display: block;
+    padding: 5px;
     text-decoration: none;
-    font-size: 20px;
-    margin-right: 70px;
-    background: url('./synyx-logo-nav.png') no-repeat center center;
-    background-size: 75px auto;
-    overflow: hidden;
-    text-indent: -9999px;
+}
+.navSectionList > li:hover {
+    background-color: #E0E0E0;
+}
+
+.buttonLogout {
+    margin-top: 20px;
+    border: none;
+    background-color: #AED581;
+    color: #33691E;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 0.3em 0em;
+    transition: background-color ease 150ms;
+}
+.buttonLogout:focus, .buttonLogout:hover, .buttonLogout:active {
+    background-color: #8BC34A;
+    color: #1B5E20;
+}
+.buttonLogout:hover {
+    /* outline should exist on tab navigation but not on mouse click */
+    outline: none;
+}
+
+
+.headerContainer.visible .hamburger span{
+    background-color: transparent;
+}
+.headerContainer.visible .hamburger span::before, .headerContainer.visible .hamburger span::after {
+    margin-top: 0px;
+    transition-delay: 0, 0.2s;
+}
+.headerContainer.visible .hamburger span::before {
+    transform: rotate(45deg);
+}
+.headerContainer.visible .hamburger span::after {
+    transform: rotate(-45deg);
+}
+
+
+@media screen and (min-width: 440px) {
+    /*
+        styling is for smaller devices by default
+        so we have to swap styling (by class names) on larger devices
+        small device: navbar should be hidden by default
+        big device: navbar should be visible by default
+        clicking hamburger toggles the `.visible` class which actually means hide me on a big screen
+     */
+    .headerContainer.visible {
+        width: 65px;
+    }
+    .headerContainer:not(.visible) {
+        width: 200px;
+    }
+
+    .headerContainer.visible .avatar {
+        padding: 2px;
+    }
+    .headerContainer:not(.visible) .avatar {
+        padding: 5px;
+    }
+    .headerContainer.visible .avatar img {
+        width: 33px;
+        height: 33px;
+    }
+    .headerContainer:not(.visible) .avatar img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .headerContainer.visible .username {
+        display: none;
+    }
+    .headerContainer:not(.visible) .username {
+        display: block;
+    }
+    .headerContainer.visible nav {
+        display: none;
+    }
+    .headerContainer:not(.visible) nav {
+        display: block;
+    }
+
+    .headerContainer:not(.visible) .hamburger span {
+        background-color: transparent;
+    }
+    .headerContainer:not(.visible) .hamburger span::before,
+    .headerContainer:not(.visible) .hamburger span::after {
+        margin-top: 0px;
+        transition-delay: 0, 0.2s;
+    }
+    .headerContainer:not(.visible) .hamburger span::before {
+        transform: rotate(45deg);
+    }
+    .headerContainer:not(.visible) .hamburger span::after {
+        transform: rotate(-45deg);
+    }
+
+    .headerContainer.visible .hamburger span {
+        background-color: #525252;
+    }
+    .headerContainer.visible .hamburger span::before {
+        transition-delay: 0s;
+        transform: rotate(0deg);
+        margin-top: -6px;
+    }
+    .headerContainer.visible .hamburger span::after {
+        transition-delay: 0s;
+        transform: rotate(0deg);
+        margin-top: 6px;
+    }
 }
