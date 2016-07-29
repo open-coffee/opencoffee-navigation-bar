@@ -8,14 +8,14 @@ export default function navbar({
 }) {
     const favoriteListItems = favorites.map(app => (
         `<li>
-           <a href="${app.url}">${app.name}</a>
+           <a href="${app.url}" title="${app.name}">${app.name}</a>
            <span><i class="${styles.favstar}" data-is-fav="true" data-app="${app.name}"></i></span>
          </li>`
     ));
 
     const appListItems = apps.map(app => (
         `<li>
-           <a href="${app.url}">${app.name}</a>
+           <a href="${app.url}" title="${app.name}">${app.name}</a>
            <span><i class="${styles.favstar}" data-app="${app.name}"></i></span>
          </li>`
     ));
