@@ -169,6 +169,8 @@
     padding: 5px;
     display: block;
 }
+.navSectionList li.active > a,
+.navSectionList li.active > a + span,
 .navSectionList li:hover > a,
 .navSectionList li:hover > a + span {
     background-color: #E0E0E0;

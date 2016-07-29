@@ -7,14 +7,14 @@ export default function navbar({
     favorites = [],
 }) {
     const favoriteListItems = favorites.map(app => (
-        `<li>
+        `<li class="${isAppActive(app) ? styles.active : ''}">
            <a href="${app.url}" title="${app.name}">${app.name}</a>
            <span><i class="${styles.favstar}" data-is-fav="true" data-app="${app.name}"></i></span>
          </li>`
     ));
 
     const appListItems = apps.map(app => (
-        `<li>
+        `<li class="${isAppActive(app) ? styles.active : ''}">
            <a href="${app.url}" title="${app.name}">${app.name}</a>
            <span><i class="${styles.favstar}" data-app="${app.name}"></i></span>
          </li>`
@@ -59,4 +59,8 @@ export default function navbar({
                 </button> 
             </form>
         </nav>`;
+}
+
+function isAppActive({ url = '' }) {
+    return window.location.origin === url;
 }
