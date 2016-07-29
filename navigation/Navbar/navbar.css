@@ -154,7 +154,10 @@
     opacity: 0;
     transition: opacity 150ms ease;
     width: 20px;
+    height: 20px;
     display: block;
+    background: url('./star.png') no-repeat center;
+    background-size: 20px;
 }
 .navSectionList li:hover .favstar {
     opacity: 1;
