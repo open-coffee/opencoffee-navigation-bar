@@ -2,9 +2,24 @@ import { html } from 'common-tags';
 import styles from './navbar.css';
 
 export default function navbar({
-    username,
+    username = '',
     apps = [],
+    favorites = [],
 }) {
+    const favoriteListItems = favorites.map(app => (
+        `<li>
+           <a href="${app.url}">${app.name}</a>
+           <span><i class="${styles.favstar}" data-is-fav="true" data-app="${app.name}">⭐</i></span>
+         </li>`
+    ));
+
+    const appListItems = apps.map(app => (
+        `<li>
+           <a href="${app.url}">${app.name}</a>
+           <span><i class="${styles.favstar}" data-app="${app.name}">⭐</i></span>
+         </li>`
+    ));
+
     return html`
         <div id="coffee-nav-hamburger" class="${styles.hamburger}">
             <span></span>
@@ -15,11 +30,19 @@ export default function navbar({
                 ${username}
             </h2>
         </div>
-        <nav>
-            <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
-            <ul class="${styles.navSectionList}">
-                ${apps.map(app => `<li><a href="${app.url}">${app.name}</a></li>`)}
-            </ul>
+        <nav id="coffe-nav">
+            ${favoriteListItems.length === 0 ? '' : (html`
+                <h2 class="${styles.navSectionTitle}">Favoriten</h2>
+                <ul class="${styles.navSectionList}">
+                    ${favoriteListItems}    
+                </ul>
+            `)}
+            ${appListItems.length === 0 ? '' : (html`
+                <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
+                <ul class="${styles.navSectionList}">
+                    ${appListItems}    
+                </ul>
+            `)}
             <h2 class="${styles.navSectionTitle}">Einstellungen</h2>
             <ul class="${styles.navSectionList}">
                 <li>

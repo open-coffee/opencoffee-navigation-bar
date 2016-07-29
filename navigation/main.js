@@ -11,24 +11,10 @@ const fetchUsername = GET_JSON('/coffeenet/user')
     .then(user => user.username);
 
 const fetchApps = GET_JSON('/coffeenet/apps')
-    .then(data => {
-        const apps = [].slice.call(data);
-
-        if (apps.length === 0) {
-            console.info('CoffeeNet: No application discovered');
-            return [
-                { name: 'No other applications registered', url: '' },
-            ];
-        }
-
-        apps.sort(compareByName);
-        return apps;
-    })
+    .then(apps => [...apps].sort(compareByName))
     .catch((err) => {
         console.info('CoffeeNet: Could not receive discovered applications', err);
-        return Promise.resolve([
-            { name: 'Could not receive CoffeeNet applications', url: '' },
-        ]);
+        return Promise.resolve([]);
     });
 
 GET('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
@@ -45,18 +31,42 @@ Promise.all([
 ]).then(values => {
     const [username, apps] = values;
     const header = document.getElementById('coffeenet-header');
-    header.classList.add(styles.headerContainer);
-    header.innerHTML = navbar({ username, apps });
-    document.getElementById('coffee-nav-hamburger').addEventListener('click', () => {
+    var myFavs = JSON.parse(localStorage.getItem('coffee::nav::favs') || '[]');
+    var myApps = apps.filter(app => !myFavs.some(fav => fav.name === app.name));
+
+    function handleHamburgerClick() {
         header.classList.toggle(styles.visible);
+    }
+
+    function handleUnFavClick(event) {
+        const unfavedApp = myFavs.find(fav => fav.name === event.target.dataset.app);
+        myFavs = [...myFavs].filter(fav => fav.name !== event.target.dataset.app);
+        myApps = [...myApps, unfavedApp].sort(compareByName);
+        localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
+        render({ username, apps: myApps, favorites: myFavs });
+    }
+
+    function handleFavClick(event) {
+        myFavs = [...myFavs, myApps.find(app => app.name === event.target.dataset.app)].sort(compareByName);
+        myApps = [...myApps].filter(app => app.name !== event.target.dataset.app);
+        localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
+        render({ username, apps: myApps, favorites: myFavs });
+    }
+
+    header.classList.add(styles.headerContainer);
+    header.addEventListener('click', event => {
+        if (event.target.id === 'coffee-nav-hamburger') {
+            handleHamburgerClick();
+        }
+        else if (event.target.dataset.app && event.target.dataset.isFav === 'true') {
+            handleUnFavClick(event);
+        }
+        else if (event.target.dataset.app) {
+            handleFavClick(event);
+        }
     });
 
-    const avatarImg = document.createElement('img');
-    avatarImg.src = gravatarUrl(guessEmail(username), { size: 64 });
-    avatarImg.onError = function avatarFetchError() {
-        avatarImg.src = ''; // TODO copy anon_img in dist and set as src
-    };
-    document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
+    render({ username, apps: myApps, favorites: myFavs });
 });
 
 function guessEmail(name) {
@@ -77,4 +87,20 @@ function compareByName(a, b) {
     const nameA = a.name.toLowerCase();
     const nameB = b.name.toLowerCase();
     return nameA.localeCompare(nameB);
+}
+
+function render({
+    apps = [],
+    favorites = [],
+    username,
+}) {
+    const html = navbar({ username, apps, favorites });
+    document.getElementById('coffeenet-header').innerHTML = html;
+
+    const avatarImg = document.createElement('img');
+    avatarImg.src = gravatarUrl(guessEmail(username), { size: 64 });
+    avatarImg.onError = function avatarFetchError() {
+        avatarImg.src = ''; // TODO copy anon_img in dist and set as src
+    };
+    document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
 }

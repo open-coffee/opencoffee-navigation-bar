@@ -129,16 +129,34 @@
     display: flex;
     flex-direction: column;
 }
-.navSectionList > li {
-    transition: background-color ease 150ms;
+.navSectionList li {
+    display: flex;
+    align-items: center;
 }
-.navSectionList > li > a {
-    display: block;
-    padding: 5px;
+.navSectionList li > a {
     text-decoration: none;
+    flex-grow: 1;
 }
-.navSectionList > li:hover {
+.navSectionList li > a,
+.navSectionList li > a + span {
+    transition: background-color ease 150ms;
+    padding: 5px;
+    display: block;
+}
+.navSectionList li:hover > a,
+.navSectionList li:hover > a + span {
     background-color: #E0E0E0;
+}
+.navSectionList li .favstar {
+    font-style: normal;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 150ms ease;
+    width: 20px;
+    display: block;
+}
+.navSectionList li:hover .favstar {
+    opacity: 1;
 }
 
 .buttonLogout {
