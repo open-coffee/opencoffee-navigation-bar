@@ -32,8 +32,8 @@ Promise.all([
     const [username, apps] = values;
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
-    var myFavs = JSON.parse(localStorage.getItem('coffee::nav::favs') || '[]');
-    var myApps = apps.filter(app => !myFavs.some(fav => fav.name === app.name));
+    let myFavs = JSON.parse(localStorage.getItem('coffee::nav::favs') || '[]');
+    let myApps = apps.filter(app => !myFavs.some(fav => fav.name === app.name));
 
     function handleHamburgerClick() {
         header.classList.toggle(styles.visible);
