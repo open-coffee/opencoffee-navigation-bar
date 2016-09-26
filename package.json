@@ -13,7 +13,7 @@
     "babel-core": "6.11.4",
     "babel-loader": "6.2.4",
     "babel-preset-es2015": "6.9.0",
-    "coffee-fetch": "git+ssh://git@gitlab.synyx.de:coffeenet/coffee-fetch.git#v0.1.0",
+    "coffee-fetch": "0.2.0",
     "common-tags": "1.3.1",
     "css-loader": "0.23.1",
     "eslint": "3.6.0",
