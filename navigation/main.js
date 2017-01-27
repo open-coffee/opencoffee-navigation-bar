@@ -2,18 +2,13 @@
 
 import 'whatwg-fetch';
 import { GET, GET_JSON } from 'coffee-fetch';
-import gravatarUrl from 'gravatar-url';
 import navbar from './Navbar/Navbar';
 import styles from './Navbar/navbar.css';
 
-
-const fetchUsername = GET_JSON('/coffeenet/user')
-    .then(user => user.username);
-
-const fetchApps = GET_JSON('/coffeenet/apps')
-    .then(apps => [...apps].sort(compareByName))
+const fetchCoffeeNetWeb = GET_JSON('/coffeenet/web')
+    .then(coffeeNetWeb => coffeeNetWeb)
     .catch((err) => {
-        console.info('CoffeeNet: Could not receive discovered applications', err);
+        console.info('CoffeeNet: Could not receive CoffeeNetWeb information', err);
         return Promise.resolve([]);
     });
 
@@ -24,12 +19,15 @@ GET('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
         document.querySelector('head').appendChild(style);
     });
 
-
 Promise.all([
-    fetchUsername,
-    fetchApps,
-]).then(values => {
-    const [username, apps] = values;
+    fetchCoffeeNetWeb,
+]).then(coffeeNetWebs => {
+    const coffeeNetWeb = coffeeNetWebs[0];
+    const user = coffeeNetWeb.coffeeNetWebUser;
+    const apps = coffeeNetWeb.coffeeNetApps;
+    const profileApp = coffeeNetWeb.profileApp;
+    const logoutPath = coffeeNetWeb.logoutPath;
+
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
     let myFavs = JSON.parse(localStorage.getItem('coffee::nav::favs') || '[]');
@@ -45,14 +43,14 @@ Promise.all([
         myFavs = [...myFavs].filter(fav => fav.name !== event.target.dataset.app);
         myApps = [...myApps, unfavedApp].sort(compareByName);
         localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
-        render({ username, apps: myApps, favorites: myFavs });
+        render({ apps: myApps, favorites: myFavs, profileApp, user, logoutPath });
     }
 
     function handleFavClick(event) {
         myFavs = [...myFavs, myApps.find(app => app.name === event.target.dataset.app)].sort(compareByName);
         myApps = [...myApps].filter(app => app.name !== event.target.dataset.app);
         localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
-        render({ username, apps: myApps, favorites: myFavs });
+        render({ apps: myApps, favorites: myFavs, profileApp, user, logoutPath });
     }
 
     if (initiallyVisible) {
@@ -71,22 +69,8 @@ Promise.all([
         }
     });
 
-    render({ username, apps: myApps, favorites: myFavs });
+    render({ apps: myApps, favorites: myFavs, profileApp, user, logoutPath });
 });
-
-function guessEmail(name) {
-    const parts = name.split(/\s+/);
-    const lastname = parts[parts.length - 1];
-    const lastnameEscaped = withoutUmlauts(lastname);
-    return `${lastnameEscaped}@synyx.de`;
-}
-
-function withoutUmlauts(string) {
-    return string
-        .replace(/ä/g, 'ae')
-        .replace(/ö/g, 'oe')
-        .replace(/ü/g, 'ue');
-}
 
 function compareByName(a, b) {
     const nameA = a.name.toLowerCase();
@@ -97,15 +81,15 @@ function compareByName(a, b) {
 function render({
     apps = [],
     favorites = [],
-    username,
+    profileApp,
+    user,
+    logoutPath,
 }) {
-    const html = navbar({ username, apps, favorites });
+    const username = user.username;
+    const html = navbar({ username, apps, favorites, profileApp, logoutPath });
     document.getElementById('coffeenet-header').innerHTML = html;
 
     const avatarImg = document.createElement('img');
-    avatarImg.src = gravatarUrl(guessEmail(username), { size: 64 });
-    avatarImg.onError = function avatarFetchError() {
-        avatarImg.src = ''; // TODO copy anon_img in dist and set as src
-    };
+    avatarImg.src = user.avatar;
     document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
 }

@@ -5,6 +5,8 @@ export default function navbar({
     username = '',
     apps = [],
     favorites = [],
+    profileApp,
+    logoutPath,
 }) {
     const favoriteListItems = favorites.map(app => (
         `<li class="${isAppActive(app) ? styles.active : ''}">
@@ -25,14 +27,23 @@ export default function navbar({
             <span></span>
         </div>
         <div class="${styles.personalisationContainer}">
-            <div class="${styles.avatar}">
-                <a id="coffee-nav-user-avatar" href="https://profile.synyx.coffee"></a>
-            </div>
-            <h2 class="${styles.username}">
-                <a href="https://profile.synyx.coffee" title="Profile">
-                    ${username}
-                </a>
-            </h2>
+            ${profileApp === null ? (html`
+                <div id="coffee-nav-user-avatar" class="${styles.avatar}"></div>
+                <h2 class="${styles.username}">
+                    <span>
+                        ${username}
+                    </span>
+                </h2>
+            `) : (html`
+                <div class="${styles.avatar}">
+                    <a id="coffee-nav-user-avatar" href="${profileApp.url}"></a>
+                </div>
+                <h2 class="${styles.username}">
+                    <a href="${profileApp.url}" title="${profileApp.name}">
+                        ${username}
+                    </a>
+                </h2>
+            `)}
         </div>
         <nav id="coffe-nav" class="${styles.coffeeNavContainer}">
             ${favoriteListItems.length === 0 ? '' : (html`
@@ -47,13 +58,15 @@ export default function navbar({
                     ${appListItems}    
                 </ul>
             `)}
-            <h2 class="${styles.navSectionTitle}">Einstellungen</h2>
-            <ul class="${styles.navSectionList}">
-                <li>
-                    <a href="https://profile.synyx.coffee">Profil</a>
-                </li>
-            </ul>
-            <form action="/logout" method="post"> 
+            ${profileApp === null ? '' : (html`
+                <h2 class="${styles.navSectionTitle}">Einstellungen</h2>
+                <ul class="${styles.navSectionList}">
+                    <li>
+                        <a href="${profileApp.url}">${profileApp.name}</a>
+                    </li>
+                </ul>
+            `)}
+            <form action="${logoutPath}" method="post">
                 <button type="submit" class="${styles.buttonLogout}"> 
                     Logout
                 </button> 
