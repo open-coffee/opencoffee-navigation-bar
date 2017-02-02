@@ -4,21 +4,12 @@ import styles from './navbar.css';
 export default function navbar({
     username = '',
     apps = [],
-    favorites = [],
     profileApp,
     logoutPath,
 }) {
-    const favoriteListItems = favorites.map(app => (
-        `<li class="${isAppActive(app) ? styles.active : ''}">
-           <a href="${app.url}" title="${app.name}">${app.name}</a>
-           <span><i class="${styles.favstar}" data-is-fav="true" data-app="${app.name}"></i></span>
-         </li>`
-    ));
-
     const appListItems = apps.map(app => (
         `<li class="${isAppActive(app) ? styles.active : ''}">
            <a href="${app.url}" title="${app.name}">${app.name}</a>
-           <span><i class="${styles.favstar}" data-app="${app.name}"></i></span>
          </li>`
     ));
 
@@ -46,12 +37,6 @@ export default function navbar({
             `)}
         </div>
         <nav id="coffe-nav" class="${styles.coffeeNavContainer}">
-            ${favoriteListItems.length === 0 ? '' : (html`
-                <h2 class="${styles.navSectionTitle}">Favoriten</h2>
-                <ul class="${styles.navSectionList}">
-                    ${favoriteListItems}    
-                </ul>
-            `)}
             ${appListItems.length === 0 ? '' : (html`
                 <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
                 <ul class="${styles.navSectionList}">

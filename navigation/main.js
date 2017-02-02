@@ -30,27 +30,10 @@ Promise.all([
 
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
-    let myFavs = JSON.parse(localStorage.getItem('coffee::nav::favs') || '[]');
-    let myApps = apps.filter(app => !myFavs.some(fav => fav.name === app.name));
 
     function handleHamburgerClick() {
         header.classList.toggle(styles.visible);
         localStorage.setItem('coffee::nav::visible', header.classList.contains(styles.visible));
-    }
-
-    function handleUnFavClick(event) {
-        const unfavedApp = myFavs.find(fav => fav.name === event.target.dataset.app);
-        myFavs = [...myFavs].filter(fav => fav.name !== event.target.dataset.app);
-        myApps = [...myApps, unfavedApp].sort(compareByName);
-        localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
-        render({ apps: myApps, favorites: myFavs, profileApp, user, logoutPath });
-    }
-
-    function handleFavClick(event) {
-        myFavs = [...myFavs, myApps.find(app => app.name === event.target.dataset.app)].sort(compareByName);
-        myApps = [...myApps].filter(app => app.name !== event.target.dataset.app);
-        localStorage.setItem('coffee::nav::favs', JSON.stringify(myFavs));
-        render({ apps: myApps, favorites: myFavs, profileApp, user, logoutPath });
     }
 
     if (initiallyVisible) {
@@ -61,32 +44,19 @@ Promise.all([
         if (event.target.id === 'coffee-nav-hamburger' || event.target.parentNode.id === 'coffee-nav-hamburger') {
             handleHamburgerClick();
         }
-        else if (event.target.dataset.app && event.target.dataset.isFav === 'true') {
-            handleUnFavClick(event);
-        }
-        else if (event.target.dataset.app) {
-            handleFavClick(event);
-        }
     });
 
-    render({ apps: myApps, favorites: myFavs, profileApp, user, logoutPath });
+    render({ apps, profileApp, user, logoutPath });
 });
-
-function compareByName(a, b) {
-    const nameA = a.name.toLowerCase();
-    const nameB = b.name.toLowerCase();
-    return nameA.localeCompare(nameB);
-}
 
 function render({
     apps = [],
-    favorites = [],
     profileApp,
     user,
     logoutPath,
 }) {
     const username = user.username;
-    const html = navbar({ username, apps, favorites, profileApp, logoutPath });
+    const html = navbar({ username, apps, profileApp, logoutPath });
     document.getElementById('coffeenet-header').innerHTML = html;
 
     const avatarImg = document.createElement('img');
