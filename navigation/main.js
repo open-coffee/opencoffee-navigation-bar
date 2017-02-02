@@ -49,12 +49,6 @@ Promise.all([
     render({ apps, profileApp, user, logoutPath });
 });
 
-function compareByName(a, b) {
-    const nameA = a.name.toLowerCase();
-    const nameB = b.name.toLowerCase();
-    return nameA.localeCompare(nameB);
-}
-
 function render({
     apps = [],
     profileApp,
