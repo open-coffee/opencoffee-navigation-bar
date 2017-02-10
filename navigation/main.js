@@ -22,11 +22,7 @@ GET('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
 Promise.all([
     fetchCoffeeNetWeb,
 ]).then(coffeeNetWebs => {
-    const coffeeNetWeb = coffeeNetWebs[0];
-    const user = coffeeNetWeb.coffeeNetWebUser;
-    const apps = coffeeNetWeb.coffeeNetApps;
-    const profileApp = coffeeNetWeb.profileApp;
-    const logoutPath = coffeeNetWeb.logoutPath;
+    const { coffeeNetWebUser, coffeeNetApps, profileApp, logoutPath } = coffeeNetWebs[0];
 
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
@@ -46,7 +42,12 @@ Promise.all([
         }
     });
 
-    render({ apps, profileApp, user, logoutPath });
+    render({
+        profileApp,
+        logoutPath,
+        apps: coffeeNetApps,
+        user: coffeeNetWebUser,
+    });
 });
 
 function render({
