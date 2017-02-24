@@ -4,7 +4,9 @@ var ExtractTextPlugin = require ('extract-text-webpack-plugin');
 var autoprefixer = require ('autoprefixer');
 
 var inputPath = path.resolve(__dirname, 'navigation');
-var outputPath = path.resolve(__dirname, 'src/main/resources');
+var outputPath = path.resolve(__dirname, 'target/dist');
+
+const mavenPom = require ('./scripts/mavenPom');
 
 module.exports = {
 
@@ -15,6 +17,7 @@ module.exports = {
 
     output: {
         path: outputPath,
+        publicPath: `/webjars/${mavenPom.artifactId}/${mavenPom.version}/`,
         filename: '[name].js'
     },
 
