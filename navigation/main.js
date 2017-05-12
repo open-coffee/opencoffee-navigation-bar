@@ -7,8 +7,7 @@ import styles from './Navbar/navbar.css';
 
 const fetchCoffeeNetWeb = GET_JSON('/coffeenet/web')
     .then(coffeeNetWeb => coffeeNetWeb)
-    .catch((err) => {
-        console.info('CoffeeNet: Could not receive CoffeeNetWeb information', err);
+    .catch(() => {
         return Promise.resolve([]);
     });
 
