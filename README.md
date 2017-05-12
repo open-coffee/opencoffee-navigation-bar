@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/coffeenet/coffeenet-navigation-bar.svg?branch=master)](https://travis-ci.org/coffeenet/coffeenet-navigation-bar)
+
 # Navigation Bar
 
 ## How to use
