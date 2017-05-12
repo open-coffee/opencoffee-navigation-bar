@@ -52,21 +52,6 @@ Now just add the simple html snipped listed below where you want to show the Cof
 
 Only change the files based in the /navigation folder.
 
-### Setup
-
-This project uses private npm modules hosted by synyx nexus.
-The registry can be configured in `~/.npmrc` file.
-
-```bash
-# credentials
-echo -n 'username:password' | openssl base64
-
-# ~/.npmrc
-registry=https://nexus.synyx.de/content/groups/npmjs-all/
-_auth=credentials
-always-auth=true
-```
-
 ### Build
 
 ```
