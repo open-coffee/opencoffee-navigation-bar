@@ -17,7 +17,7 @@ If you have already bootstrap in your project so just use that dependency.
 <repositories>
   <repository>
     <id>releases.nexus.synyx.de</id>
-    <url>http://nexus.synyx.de/content/repositories/releases</url>
+    <url>http://nexus.synyx.de/content/repositories/public-releases</url>
   </repository>
 </repositories>
 ```
