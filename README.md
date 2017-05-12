@@ -40,14 +40,6 @@ Now just add the simple html snipped listed below where you want to show the Cof
 <header id="coffeenet-header"></header>
 ```
 
-#### Optional
-
-```
-    <link rel="stylesheet" href="webjars/bootstrap/${bootstrap.version}/css/bootstrap.min.css">
-    <script src="/webjars/jquery/${jquery.version}/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/${bootstrap.version}/js/bootstrap.min.js"></script>
-```
-
 ## Development
 
 Only change the files based in the /navigation folder.
