@@ -9,6 +9,19 @@ If you have already bootstrap in your project so just use that dependency.
 
 ### Maven
 
+#### Repository
+
+```xml
+<repositories>
+  <repository>
+    <id>releases.nexus.synyx.de</id>
+    <url>http://nexus.synyx.de/content/repositories/releases</url>
+  </repository>
+</repositories>
+```
+
+#### Dependency
+
 ```
 <dependency>
     <groupId>coffee.synyx</groupId>
