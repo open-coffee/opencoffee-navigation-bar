@@ -12,3 +12,14 @@ install:
 script:
   - nvm use $NODE_VERSION
   - mvn clean install
+
+deploy:
+  provider: releases
+  api_key:
+    secure: ocSKy4AwZrkPCUWZttbvFj9aF0q+1t00uJ7EV9pT3MSyuOlRWnL44JKsScTehZxNr0ZiDOX6kPQVsqCYVzdWkjTynlPgJ8dBNgSW5xQb3guEm1wNP06FhRUwzZVq13OjHoYMdRakSEZC8aMNCTCRAUGNpAid23TPuY7yx10e/RRGTgfcBOqZ4/Ltsx9tga6oVsHcOrd2ve4TbiTmj7SDe/b+g3plY/8KoZhx0/fXELXNuKvQYZ8zkgqmM5egnUvDAZkdQcFyHYgpQGa8fzsmYX1OmOvZLcxNsYTMGWFhxZuBYbWgKzrZsbIA/oKGa4+Y9QwvZC8A2wNge3/GWebDQXdB7jRKMZHxh6u026K2GIHyeMg+LQv6GH4PVQvfOYURHFsjuDwgwja9ItslSqSKkYg/1WtSquEFgZzWK2hgZSeGLS+yi5324IfyX06g99vHNOurmiQ8JZrirkrI+OH+RBRcS3PA0MIv6ZqqlveRClsr6MUvqN03rwqVX8fh3utJ6RmAZQ8UrapiWccJeiGbhyMUmrXQ8vXmj6vgfKF2cOlzscklYNDuihGxZfrbaR0JafEJGYJ+4nWebivvejlx0ipWgdo32QZUPcRdBKi+PuvZlP0yqIIYGFKDSFSxaWTEddTEY7/yuzJciUFuOL6eN7IOAsS52ZHUV7W1D0269P4=
+  file_glob: true
+  file: './target/navigation-bar*.jar'
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: coffeenet/coffeenet-navigation-bar
