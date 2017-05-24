@@ -11,4 +11,4 @@ install:
 
 script:
   - nvm use $NODE_VERSION
-  - ./mvnw clean install
+  - mvn clean install
