@@ -3,9 +3,6 @@ language: java
 jdk:
   - oraclejdk8
 
-env:
-  - NODE_VERSION=6
-
 install:
   - nvm install $NODE_VERSION
 
@@ -14,12 +11,24 @@ script:
   - mvn clean install
 
 deploy:
-  provider: releases
-  api_key:
-    secure: ocSKy4AwZrkPCUWZttbvFj9aF0q+1t00uJ7EV9pT3MSyuOlRWnL44JKsScTehZxNr0ZiDOX6kPQVsqCYVzdWkjTynlPgJ8dBNgSW5xQb3guEm1wNP06FhRUwzZVq13OjHoYMdRakSEZC8aMNCTCRAUGNpAid23TPuY7yx10e/RRGTgfcBOqZ4/Ltsx9tga6oVsHcOrd2ve4TbiTmj7SDe/b+g3plY/8KoZhx0/fXELXNuKvQYZ8zkgqmM5egnUvDAZkdQcFyHYgpQGa8fzsmYX1OmOvZLcxNsYTMGWFhxZuBYbWgKzrZsbIA/oKGa4+Y9QwvZC8A2wNge3/GWebDQXdB7jRKMZHxh6u026K2GIHyeMg+LQv6GH4PVQvfOYURHFsjuDwgwja9ItslSqSKkYg/1WtSquEFgZzWK2hgZSeGLS+yi5324IfyX06g99vHNOurmiQ8JZrirkrI+OH+RBRcS3PA0MIv6ZqqlveRClsr6MUvqN03rwqVX8fh3utJ6RmAZQ8UrapiWccJeiGbhyMUmrXQ8vXmj6vgfKF2cOlzscklYNDuihGxZfrbaR0JafEJGYJ+4nWebivvejlx0ipWgdo32QZUPcRdBKi+PuvZlP0yqIIYGFKDSFSxaWTEddTEY7/yuzJciUFuOL6eN7IOAsS52ZHUV7W1D0269P4=
-  file_glob: true
-  file: './target/navigation-bar*.jar'
-  skip_cleanup: true
-  on:
-    tags: true
-    repo: coffeenet/coffeenet-navigation-bar
+  - provider: releases
+    api_key:
+      secure: ocSKy4AwZrkPCUWZttbvFj9aF0q+1t00uJ7EV9pT3MSyuOlRWnL44JKsScTehZxNr0ZiDOX6kPQVsqCYVzdWkjTynlPgJ8dBNgSW5xQb3guEm1wNP06FhRUwzZVq13OjHoYMdRakSEZC8aMNCTCRAUGNpAid23TPuY7yx10e/RRGTgfcBOqZ4/Ltsx9tga6oVsHcOrd2ve4TbiTmj7SDe/b+g3plY/8KoZhx0/fXELXNuKvQYZ8zkgqmM5egnUvDAZkdQcFyHYgpQGa8fzsmYX1OmOvZLcxNsYTMGWFhxZuBYbWgKzrZsbIA/oKGa4+Y9QwvZC8A2wNge3/GWebDQXdB7jRKMZHxh6u026K2GIHyeMg+LQv6GH4PVQvfOYURHFsjuDwgwja9ItslSqSKkYg/1WtSquEFgZzWK2hgZSeGLS+yi5324IfyX06g99vHNOurmiQ8JZrirkrI+OH+RBRcS3PA0MIv6ZqqlveRClsr6MUvqN03rwqVX8fh3utJ6RmAZQ8UrapiWccJeiGbhyMUmrXQ8vXmj6vgfKF2cOlzscklYNDuihGxZfrbaR0JafEJGYJ+4nWebivvejlx0ipWgdo32QZUPcRdBKi+PuvZlP0yqIIYGFKDSFSxaWTEddTEY7/yuzJciUFuOL6eN7IOAsS52ZHUV7W1D0269P4=
+    file_glob: true
+    file: './target/navigation-bar*.jar'
+    skip_cleanup: true
+    on:
+      tags: true
+      repo: coffeenet/coffeenet-navigation-bar
+  - provider: script
+    script: echo "<settings><servers><server><id>releases.public.nexus.synyx.de</id><username>$NEXUS_USERNAME</username><password>$NEXUS_PASS</password></server></servers></settings>" > ~/settings.xml; mvn deploy --settings ~/settings.xml -DskipTests
+    skip_cleanup: true
+    on:
+      tags: true
+      repo: coffeenet/coffeenet-navigation-bar
+
+env:
+  - NODE_VERSION=6
+  global:
+  - secure: T+kQkWnSjCSbyfheQdAo4AJrMHzYpQj4bF1c37TV8iWWC70DxqPqv8zZmIOJsFr9JJYozQyhx7cL8tVWO5mBjiIFCmTMha7CEtQ1K6Jhq7t5vfhEvGeklMOI4Hx/Y4VLlZXpuaAoFPPjbsTDd0TLbgJxF/iaqLBsWWcSXtdzpCcNYonZuoS4CTLQgUGsSikLQsJDRtYrMUm+dgowVFzNUp3grfPx5os0hx44WVw3sEYoXdSVi4f6OGN0npvOZTbVA+jBqBye1zfp//OebdCtQOMpSXY7D1/4dDtKLku9++5bvXUYHIJPDj7sq/ErDUcPKGz1oG/kMkYdJa2Im5kmqXCAOZUZMKATbrzFV1NVqOGVG1xD8G3f3CkB2Pf0n9JTW2kABGzf5ezZZzWwc89uZ6DdsMjUJPm1Ee8cCztuTtkxcRTfFYddt/5cN57vG23UKHPY1NYmfF0DewjKk8Wpk6tChPr5JmgtEiK8MUzX0LaTsNHK5xixdXLbthujHy+Amo+th8cVjNVKCsOLHS9dlbolKYkd1/epDRGvdl7rgttjb+94x4/8jH8xR88oXZJLFUhMamI18kppyOmLYtiIGHlsKM/2twFoSqeSr3IdoX//kRInOA3soaIixlvxc+SWYQNSPAcxgjoAfszGVnWun6PBhOO1ZsVNpcoZkYu3qg4=
+  - secure: rbky9DFjs6DU7FMDCXv0d1bvSJosFS4hRNy8gGd4Ca6rXRdMhVAHI4HbBxwgeF+SkRSsItUAKZLHX9VYubR68B57TKHUd6WDzXuRc5x8eOeYpCIGxK7xfSG/wS80TfBlvGEnblhijnLm91WY+eI53m4MLewS22TTTT4pevV3ixERs1CZriZXNKPitpXezzotknQR6c62sc8QZjPzFeO96Nyaow2pHjmET6Mmz2oV54ZCnQ6szlHoGqmjdwsso7IY5kN67U6f38EyeSIdAvxN1Udyxi1OQS2pZckX3WkqmUWQLupSS87boAtHbq1uWKz5qs0Q3T23xX4N0uFUB6F9Oz6MEG2Cqme2XtUBW5bqPaAFKU8087WuuGYHunI2F1QDK79Sft02ZQh5hstGZONv9360nHvWVddyH0b0teuJ7wz9hmtGH1nId7aBC8xJA7TEZC0Q743s+coiAe5BDAzfHMxYDZN6pLvNpfxnqWsIe+pEpLyY84VHrn7Iz+WOPgPIxg0X61x0Qrhay5foGbveaaUYXpNQDa26CRLkr+MvEkt5oomNRoWzG08qnrOkf1I0cmrW3G3Bp9YEvLBzXNKv8KNsbLyIK3AI3ksnFPh7Ht6BVEeJS/GPjKNuxKJoEDz0sYCIWVbiwzwty+rf7KLP+Y77dSlJRG0ilvI7Tt4vFk8=
