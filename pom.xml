@@ -15,13 +15,15 @@
         <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}</destDir>
     </properties>
 
+    <issueManagement>
+        <url>https://github.com/coffeenet/coffeenet-navigation-bar/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
     <scm>
-        <connection>
-            scm:git:ssh://git@github.com:coffeenet/coffeenet-navigation-bar.git
-        </connection>
-        <developerConnection>
-            scm:git:ssh://git@github.com:coffeenet/coffeenet-navigation-bar.git
-        </developerConnection>
+        <url>https://github.com/coffeenet/coffeenet-navigation-bar</url>
+        <connection>scm:git:git://github.com/coffeenet/coffeenet-navigation-bar.git</connection>
+        <developerConnection>scm:git:git@github.com:coffeenet/coffeenet-navigation-bar.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
