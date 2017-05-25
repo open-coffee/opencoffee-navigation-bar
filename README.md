@@ -24,7 +24,7 @@ If you have already bootstrap in your project so just use that dependency.
 
 #### Dependency
 
-```
+```xml
 <dependency>
     <groupId>coffee.synyx</groupId>
     <artifactId>navigation-bar</artifactId>
@@ -36,13 +36,13 @@ If you have already bootstrap in your project so just use that dependency.
 
 Just add the javascript dependency
 
-```
+```html
 <script src="/webjars/navigation-bar/bundle.js"></script>
 ```
 
 or minimized
 
-```
+```html
 <script src="/webjars/navigation-bar/bundle.min.js"></script>
 ```
 
@@ -50,7 +50,7 @@ or minimized
 
 Now just add the simple html snipped listed below where you want to show the CoffeeNet header
 
-```
+```html
 <!-- CoffeeNet header -->
 <header id="coffeenet-header"></header>
 ```
@@ -61,8 +61,8 @@ Only change the files based in the /navigation folder.
 
 ### Build
 
-```
-mvn clean install
+```bash
+./mvnw clean install
 ```
 
 This command will trigger 'npm install' that will trigger webpack to convert the es2015 javascript file into es5.
