@@ -16,7 +16,7 @@ If you have already bootstrap in your project so just use that dependency.
 ```xml
 <repositories>
   <repository>
-    <id>releases.nexus.synyx.de</id>
+    <id>releases.public.nexus.synyx.de</id>
     <url>http://nexus.synyx.de/content/repositories/public-releases</url>
   </repository>
 </repositories>
