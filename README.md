@@ -40,17 +40,19 @@ javascript files in the body and the bootstrap css in the header.
 ```html
 <header>
     <link rel="stylesheet" href="webjars/bootstrap/${bootstrap.version}/css/bootstrap.min.css">
+    <!-- Your header stuff here -->
 </header>
 
 <body>
     <!-- CoffeeNet header -->
     <header id="coffeenet-header"></header>
 
-    <!-- Your body html here -->
+    <!-- Your html here -->
 
     <script src="/webjars/navigation-bar/bundle.min.js"></script>
     <script src="/webjars/jquery/${jquery.version}/jquery.min.js"></script>
     <script src="/webjars/bootstrap/${bootstrap.version}/js/bootstrap.min.js"></script>
+    <!-- Your scripts here -->
 </body>
 ```
 
