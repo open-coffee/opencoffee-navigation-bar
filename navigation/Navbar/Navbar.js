@@ -1,5 +1,4 @@
 import { html } from 'common-tags';
-import styles from './navbar.css';
 
 export default function navbar({
     username = '',
@@ -12,6 +11,17 @@ export default function navbar({
            <a href="${app.url}" title="${app.name}">${app.name}</a>
          </li>`
     ));
+
+    const styles = {
+        hamburger: 'coffeenet--nav-hamburger',
+        personalisationContainer: 'coffeenet--personalisation-container',
+        avatar: 'coffeenet--avatar',
+        username: 'coffeenet--username',
+        coffeeNavContainer: 'coffeenet--header-container',
+        navSectionTitle: 'coffeenet--nav-section-title',
+        navSectionList: 'coffeenet--nav-section-list',
+        buttonLogout: 'coffeenet--button-logout'
+    };
 
     return html`
         <div id="coffee-nav-hamburger" class="${styles.hamburger}">

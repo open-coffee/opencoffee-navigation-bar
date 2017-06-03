@@ -39,7 +39,7 @@ javascript files in the body and the bootstrap css in the header.
 
 ```html
 <header>
-    <link rel="stylesheet" href="webjars/bootstrap/${bootstrap.version}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="webjars/bootstrap/${bootstrap.version}/dist/css/bootstrap.min.css">
     <!-- Your header stuff here -->
 </header>
 
@@ -50,8 +50,8 @@ javascript files in the body and the bootstrap css in the header.
     <!-- Your html here -->
 
     <script src="/webjars/navigation-bar/bundle.min.js"></script>
-    <script src="/webjars/jquery/${jquery.version}/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/${bootstrap.version}/js/bootstrap.min.js"></script>
+    <script src="/webjars/jquery/${jquery.version}/dist/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/${bootstrap.version}/dist/js/bootstrap.min.js"></script>
     <!-- Your scripts here -->
 </body>
 ```

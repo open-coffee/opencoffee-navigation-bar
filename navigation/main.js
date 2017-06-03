@@ -3,7 +3,6 @@
 import 'whatwg-fetch';
 import { GET, GET_JSON } from './Fetch/coffee-fetch';
 import navbar from './Navbar/Navbar';
-import styles from './Navbar/navbar.css';
 
 const fetchCoffeeNetWeb = GET_JSON('/coffeenet/web')
     .then(coffeeNetWeb => coffeeNetWeb)
@@ -11,7 +10,7 @@ const fetchCoffeeNetWeb = GET_JSON('/coffeenet/web')
         return Promise.resolve([]);
     });
 
-GET('/webjars/@project.artifactId@/css/navigation.css', { Accept: 'text/css' })
+GET('/css/coffeenet-navbar.css', { Accept: 'text/css' })
     .then(css => {
         const style = document.createElement('style');
         style.innerHTML = css;
@@ -25,6 +24,8 @@ Promise.all([
 
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
+
+    const styles = {visible: 'visible', headerContainer: 'coffeenet--header-container'};
 
     function handleHamburgerClick() {
         header.classList.toggle(styles.visible);
@@ -55,11 +56,13 @@ function render({
     user,
     logoutPath,
 }) {
-    const username = user.username;
-    const html = navbar({ username, apps, profileApp, logoutPath });
+    const username = user ? user.username : '';
+    const html = navbar({ username, apps: apps || [], profileApp, logoutPath });
     document.getElementById('coffeenet-header').innerHTML = html;
 
-    const avatarImg = document.createElement('img');
-    avatarImg.src = user.avatar;
-    document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
+    if(user){
+        const avatarImg = document.createElement('img');
+        avatarImg.src = user.avatar;
+        document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
+    }
 }
