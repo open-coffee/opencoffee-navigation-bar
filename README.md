@@ -32,27 +32,26 @@ If you have already bootstrap in your project so just use that dependency.
 </dependency>
 ```
 
-### Javascript
+### Usage
 
-Just add the javascript dependency
-
-```html
-<script src="/webjars/navigation-bar/bundle.js"></script>
-```
-
-or minimized
+Just add the html snipped listed below with the jQuery and bootstrap
+javascript files in the body and the bootstrap css in the header.
 
 ```html
-<script src="/webjars/navigation-bar/bundle.min.js"></script>
-```
+<header>
+    <link rel="stylesheet" href="webjars/bootstrap/${bootstrap.version}/css/bootstrap.min.css">
+</header>
 
-### Html
+<body>
+    <!-- CoffeeNet header -->
+    <header id="coffeenet-header"></header>
 
-Now just add the simple html snipped listed below where you want to show the CoffeeNet header
+    <!-- Your body html here -->
 
-```html
-<!-- CoffeeNet header -->
-<header id="coffeenet-header"></header>
+    <script src="/webjars/navigation-bar/bundle.min.js"></script>
+    <script src="/webjars/jquery/${jquery.version}/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/${bootstrap.version}/js/bootstrap.min.js"></script>
+</body>
 ```
 
 ## Development
