@@ -4,11 +4,11 @@
 
 ## How to use
 
-The navigation bar adds the navigation between the
-CoffeeNet Applications.
+The navigation bar adds the navigation between the CoffeeNet
+Applications.
 
-To use it you just need to add the maven dependency
-below and you are ready to go.
+To use it you just need to add the maven dependency below
+and you are ready to go.
 
 ### Maven
 
@@ -38,9 +38,10 @@ below and you are ready to go.
 Just add the html snipped listed below:
 
 ```html
-<header>
+<html>
+<head>
     <!-- Your header stuff here -->
-</header>
+</head>
 
 <body>
     <!-- CoffeeNet header -->
@@ -51,6 +52,7 @@ Just add the html snipped listed below:
     <script src="/webjars/navigation-bar/bundle.min.js"></script>
     <!-- Your scripts here -->
 </body>
+</html>
 ```
 
 ## Development
@@ -64,4 +66,4 @@ Only change the files based in the /navigation folder.
 ```
 
 This command will trigger 'npm install' that will trigger
-webpack to convert the es2015 javascriptfile into es5.
+webpack to convert the es2015 javascript file into es5.
