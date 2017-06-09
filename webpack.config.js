@@ -16,7 +16,7 @@ module.exports = {
         filename: '[name].js'
     },
 
-    devtool: 'eval',
+    devtool: 'cheap-source-map',
 
     module: {
         loaders: [
