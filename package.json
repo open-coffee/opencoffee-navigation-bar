@@ -1,7 +1,7 @@
 {
   "name": "navigation-bar",
   "private": true,
-  "description": "",
+  "description": "A JavaScript based navigation bar for the CoffeeNet",
   "scripts": {
     "postinstall": "npm run lint && npm run build",
     "build": "webpack",

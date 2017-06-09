@@ -1,6 +1,7 @@
 import { html } from 'common-tags';
 
 export default function navbar({
+    user,
     username = '',
     apps = [],
     profileApp,
@@ -13,44 +14,46 @@ export default function navbar({
     ));
 
     const styles = {
-        hamburger: 'coffeenet--nav-hamburger',
+        navHamburger: 'coffeenet--nav-hamburger',
         personalisationContainer: 'coffeenet--personalisation-container',
         avatar: 'coffeenet--avatar',
         username: 'coffeenet--username',
-        coffeeNavContainer: 'coffeenet--header-container',
+        navContainer: 'coffeenet--nav-container',
         navSectionTitle: 'coffeenet--nav-section-title',
         navSectionList: 'coffeenet--nav-section-list',
         buttonLogout: 'coffeenet--button-logout'
     };
 
     return html`
-        <div id="coffee-nav-hamburger" class="${styles.hamburger}">
+        <div id="coffeenet--nav-hamburger" class="${styles.navHamburger}">
             <span></span>
         </div>
-        <div class="${styles.personalisationContainer}">
-            ${profileApp === null ? (html`
-                <div id="coffee-nav-user-avatar" class="${styles.avatar}"></div>
-                <h2 class="${styles.username}">
-                    <span>
-                        ${username}
-                    </span>
-                </h2>
-            `) : (html`
-                <div class="${styles.avatar}">
-                    <a id="coffee-nav-user-avatar" href="${profileApp.url}"></a>
-                </div>
-                <h2 class="${styles.username}">
-                    <a href="${profileApp.url}" title="${profileApp.name}">
-                        ${username}
-                    </a>
-                </h2>
-            `)}
-        </div>
-        <nav id="coffe-nav" class="${styles.coffeeNavContainer}">
+        ${user === null ? '' : (html`
+            <div class="${styles.personalisationContainer}">
+                ${profileApp === null ? (html`
+                    <div id="coffeenet--avatar" class="${styles.avatar}"></div>
+                    <h2 class="${styles.username}">
+                        <span>
+                            ${username}
+                        </span>
+                    </h2>
+                `) : (html`
+                    <div id="coffeenet--avatar" class="${styles.avatar}">
+                        <a href="${profileApp.url}"></a>
+                    </div>
+                    <h2 class="${styles.username}">
+                        <a href="${profileApp.url}" title="${profileApp.name}">
+                            ${username}
+                        </a>
+                    </h2>
+                `)}
+            </div>
+        `)}
+        <nav class="${styles.navContainer}">
             ${appListItems.length === 0 ? '' : (html`
                 <h2 class="${styles.navSectionTitle}">Anwendungen</h2>
                 <ul class="${styles.navSectionList}">
-                    ${appListItems}    
+                    ${appListItems}
                 </ul>
             `)}
             ${profileApp === null ? '' : (html`
@@ -61,11 +64,13 @@ export default function navbar({
                     </li>
                 </ul>
             `)}
-            <form action="${logoutPath}" method="post">
-                <button type="submit" class="${styles.buttonLogout}"> 
-                    Logout
-                </button> 
-            </form>
+            ${user === null ? '' : (html`
+                <form action="${logoutPath}" method="post">
+                    <button type="submit" class="${styles.buttonLogout}"> 
+                        Logout
+                    </button> 
+                </form>
+            `)}
         </nav>`;
 }
 

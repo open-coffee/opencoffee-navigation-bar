@@ -25,7 +25,12 @@ Promise.all([
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
 
-    const styles = {visible: 'visible', headerContainer: 'coffeenet--header-container'};
+    const styles = {
+        visible: 'visible',
+        headerContainer: 'coffeenet--header-container',
+        body: 'coffeenet--body',
+        html: 'coffeenet--html'
+    };
 
     function handleHamburgerClick() {
         header.classList.toggle(styles.visible);
@@ -37,10 +42,13 @@ Promise.all([
     }
     header.classList.add(styles.headerContainer);
     header.addEventListener('click', event => {
-        if (event.target.id === 'coffee-nav-hamburger' || event.target.parentNode.id === 'coffee-nav-hamburger') {
+        if (event.target.id === 'coffeenet--nav-hamburger' || event.target.parentNode.id === 'coffeenet--nav-hamburger') {
             handleHamburgerClick();
         }
     });
+
+    document.getElementsByTagName('body')[0].classList.add(styles.body);
+    document.getElementsByTagName('html')[0].classList.add(styles.html);
 
     render({
         profileApp,
@@ -57,12 +65,12 @@ function render({
     logoutPath,
 }) {
     const username = user ? user.username : '';
-    const html = navbar({ username, apps: apps || [], profileApp, logoutPath });
+    const html = navbar({user, username, apps: apps || [], profileApp, logoutPath });
     document.getElementById('coffeenet-header').innerHTML = html;
 
     if(user){
         const avatarImg = document.createElement('img');
         avatarImg.src = user.avatar;
-        document.getElementById('coffee-nav-user-avatar').appendChild(avatarImg);
+        document.getElementById('coffeenet--avatar').appendChild(avatarImg);
     }
 }

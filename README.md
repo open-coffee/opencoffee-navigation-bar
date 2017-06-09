@@ -4,10 +4,11 @@
 
 ## How to use
 
-The navigation bar adds the navigation between the CoffeeNet Applications.
+The navigation bar adds the navigation between the
+CoffeeNet Applications.
 
-To use it you just need to add the maven dependency below and Bootstrap with jQuery and you are ready to go.
-If you have already bootstrap in your project so just use that dependency.
+To use it you just need to add the maven dependency
+below and you are ready to go.
 
 ### Maven
 
@@ -34,12 +35,10 @@ If you have already bootstrap in your project so just use that dependency.
 
 ### Usage
 
-Just add the html snipped listed below with the jQuery and bootstrap
-javascript files in the body and the bootstrap css in the header.
+Just add the html snipped listed below:
 
 ```html
 <header>
-    <link rel="stylesheet" href="webjars/bootstrap/${bootstrap.version}/dist/css/bootstrap.min.css">
     <!-- Your header stuff here -->
 </header>
 
@@ -50,8 +49,6 @@ javascript files in the body and the bootstrap css in the header.
     <!-- Your html here -->
 
     <script src="/webjars/navigation-bar/bundle.min.js"></script>
-    <script src="/webjars/jquery/${jquery.version}/dist/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/${bootstrap.version}/dist/js/bootstrap.min.js"></script>
     <!-- Your scripts here -->
 </body>
 ```
@@ -66,4 +63,5 @@ Only change the files based in the /navigation folder.
 ./mvnw clean install
 ```
 
-This command will trigger 'npm install' that will trigger webpack to convert the es2015 javascript file into es5.
+This command will trigger 'npm install' that will trigger
+webpack to convert the es2015 javascriptfile into es5.
