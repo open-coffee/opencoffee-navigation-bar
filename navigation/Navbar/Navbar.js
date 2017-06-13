@@ -7,13 +7,8 @@ export default function navbar({
     profileApp,
     logoutPath,
 }) {
-    const appListItems = apps.map(app => (
-        `<li class="${isAppActive(app) ? styles.active : ''}">
-           <a href="${app.url}" title="${app.name}">${app.name}</a>
-         </li>`
-    ));
-
     const styles = {
+        active: 'active',
         navHamburger: 'coffeenet--nav-hamburger',
         personalisationContainer: 'coffeenet--personalisation-container',
         avatar: 'coffeenet--avatar',
@@ -23,6 +18,12 @@ export default function navbar({
         navSectionList: 'coffeenet--nav-section-list',
         buttonLogout: 'coffeenet--button-logout'
     };
+
+    const appListItems = apps.map(app => (
+        `<li class="${isAppActive(app) ? styles.active : ''}">
+           <a href="${app.url}" title="${app.name}">${app.name}</a>
+         </li>`
+    ));
 
     return html`
         <div id="coffeenet--nav-hamburger" class="${styles.navHamburger}">
