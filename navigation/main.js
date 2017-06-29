@@ -4,8 +4,8 @@ import 'whatwg-fetch';
 import { GET, GET_JSON } from './Fetch/coffee-fetch';
 import navbar from './Navbar/Navbar';
 
-const fetchCoffeeNetWeb = GET_JSON('/coffeenet/web')
-    .then(coffeeNetWeb => coffeeNetWeb)
+const fetchCoffeeNavigationInformation = GET_JSON('/coffeenet/navigation')
+    .then(coffeeNetNavigationInformation => coffeeNetNavigationInformation)
     .catch(() => {
         return Promise.resolve([]);
     });
@@ -18,9 +18,9 @@ GET('/css/coffeenet-navbar.css', { Accept: 'text/css' })
     });
 
 Promise.all([
-    fetchCoffeeNetWeb,
-]).then(coffeeNetWebs => {
-    const { coffeeNetWebUser, coffeeNetApps, profileApp, logoutPath } = coffeeNetWebs[0];
+    fetchCoffeeNavigationInformation,
+]).then(coffeeNetNavigationInformation => {
+    const { currentCoffeeNetUser, coffeeNetApps, profileApp, logoutPath } = coffeeNetNavigationInformation[0];
 
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
@@ -54,7 +54,7 @@ Promise.all([
         profileApp,
         logoutPath,
         apps: coffeeNetApps,
-        user: coffeeNetWebUser,
+        user: currentCoffeeNetUser,
     });
 });
 
