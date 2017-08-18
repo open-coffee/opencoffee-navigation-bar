@@ -20,7 +20,7 @@ GET('/css/coffeenet-navbar.css', { Accept: 'text/css' })
 Promise.all([
     fetchCoffeeNavigationInformation,
 ]).then(coffeeNetNavigationInformation => {
-    const { currentCoffeeNetUser, coffeeNetApps, profileApp, logoutPath } = coffeeNetNavigationInformation[0];
+    const { currentCoffeeNetUser, coffeeNetApps, profileApp, logoutPath, coffeeNetNavigationAppInformation } = coffeeNetNavigationInformation[0];
 
     const header = document.getElementById('coffeenet-header');
     const initiallyVisible = localStorage.getItem('coffee::nav::visible') === 'true';
@@ -55,6 +55,7 @@ Promise.all([
         logoutPath,
         apps: coffeeNetApps,
         user: currentCoffeeNetUser,
+        navigationAppInformation: coffeeNetNavigationAppInformation,
     });
 });
 
@@ -63,9 +64,10 @@ function render({
     profileApp,
     user,
     logoutPath,
+    navigationAppInformation,
 }) {
     const username = user ? user.username : '';
-    const html = navbar({user, username, apps: apps || [], profileApp, logoutPath });
+    const html = navbar({user, username, apps: apps || [], profileApp, logoutPath, navigationAppInformation });
     document.getElementById('coffeenet-header').innerHTML = html;
 
     if(user){
