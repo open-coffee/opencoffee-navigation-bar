@@ -8,7 +8,7 @@ cache:
     - $HOME/.m2
 
 env:
-  - MAVEN_CLI_OPTS="--batch-mode"
+  - $MAVEN_CLI_OPTS="--batch-mode"
   - NODE_VERSION=8
   global:
     - secure: ibngQYjt4KVLkj7YYtcSknED+eT621oOUq5j4r9IShV6KxJnn93sYQ/aRhtSOOnRom+nZsLvFvmeZO5OioyRnMICcMqSNmFyMnTPrmInCb8HrGuZ37RleWtXdjGWuMPMuMUPxEf3d/ir0wW8vaPDXF7gJGOx8pk7xu/Vv+exNIVStKQ/OiJsafCTKwfsU93h0TQdGUG4b/kIyEOTuHcsPHrM2R3XqFu2e28QUPk1pIjiKob7ZelzUWdNh+h/BgLMasWJ1bSmrLaDKrqh8JqkfgwM325a8f13k8pWC7AmUHtdFfoXUAnV5fpv++ZkkFqzGsKaYncGwr1XIsU4ggfMspo2p/xr9e9IykHNUW5ky2TI4ui6yhAm++irl9oDlKpisxoDeOEiyspKDAYyoKqZTqqspmjjBbKIYSwurRdn9U2VFaUnRLsYgSB3qIRH9EtCSPCGsvLlfjYJVLxr0G+IpOpLYeo4tdt2qI0yKotmWeP5h9hFx0rizzpBLdo4o48+hfcn+khIXUBaMlKawADTjR9l+zZoFcNsKat3Sg4rqktQn7RMy2qgjfe+ds/Pc5pF2Vq5qtRI+jiZZcZ0Vc1G6i7/OBiL0/ZUOzRC4+TBWOqCbUCKqi0OFula2lRTQf3qNOwBBV79mqQJRQZQ6YGO406i5AH7FRpeNuJ32ExT1xM=
@@ -20,7 +20,7 @@ install:
 
 script:
   - nvm use $NODE_VERSION
-  - ./mvnw MAVEN_CLI_OPTS clean verify
+  - ./mvnw $MAVEN_CLI_OPTS clean verify
 
 before_deploy:
   # decrypt CoffeeNet secret key
@@ -40,7 +40,7 @@ deploy:
       repo: coffeenet/coffeenet-navigation-bar
 
   - provider: script
-    script: ./mvnw MAVEN_CLI_OPTS gpg:sign nexus-staging:release --settings ${TRAVIS_BUILD_DIR}/.travis.settings.xml -Prelease
+    script: ./mvnw $MAVEN_CLI_OPTS gpg:sign nexus-staging:release --settings ${TRAVIS_BUILD_DIR}/.travis.settings.xml -Prelease
     skip_cleanup: true
     on:
       tags: true
