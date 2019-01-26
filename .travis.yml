@@ -36,7 +36,7 @@ deploy:
       repo: coffeenet/coffeenet-navigation-bar
 
   - provider: script
-    script: ./mvnw MAVEN_CLI_OPTS gpg:sign-and-deploy-file --settings ${TRAVIS_BUILD_DIR}/.travis.settings.xml -Psign
+    script: ./mvnw MAVEN_CLI_OPTS gpg:sign nexus-staging:release --settings ${TRAVIS_BUILD_DIR}/.travis.settings.xml -Prelease
     skip_cleanup: true
     on:
       tags: true
