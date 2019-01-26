@@ -12,33 +12,24 @@ and you are ready to go.
 
 ### Maven
 
-#### Repository
-
-```xml
-<repositories>
-  <repository>
-    <id>releases.public.nexus.synyx.de</id>
-    <url>http://nexus.synyx.de/content/repositories/public-releases</url>
-  </repository>
-</repositories>
-```
-
 #### Dependency
 
 ```xml
 <dependency>
-    <groupId>coffee.synyx</groupId>
+    <groupId>rocks.coffeenet</groupId>
     <artifactId>navigation-bar</artifactId>
     <version>${version}</version>
 </dependency>
 ```
+
+is available at maven central.
 
 ### Usage
 
 Just add the html snipped listed below:
 
 ```html
-<html>
+<html lang="en">
 <head>
     <!-- Your header stuff here -->
 </head>
