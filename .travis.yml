@@ -3,12 +3,25 @@ language: java
 jdk:
   - oraclejdk8
 
+env:
+  global:
+    - NODE_VERSION=6
+    - secure: ibngQYjt4KVLkj7YYtcSknED+eT621oOUq5j4r9IShV6KxJnn93sYQ/aRhtSOOnRom+nZsLvFvmeZO5OioyRnMICcMqSNmFyMnTPrmInCb8HrGuZ37RleWtXdjGWuMPMuMUPxEf3d/ir0wW8vaPDXF7gJGOx8pk7xu/Vv+exNIVStKQ/OiJsafCTKwfsU93h0TQdGUG4b/kIyEOTuHcsPHrM2R3XqFu2e28QUPk1pIjiKob7ZelzUWdNh+h/BgLMasWJ1bSmrLaDKrqh8JqkfgwM325a8f13k8pWC7AmUHtdFfoXUAnV5fpv++ZkkFqzGsKaYncGwr1XIsU4ggfMspo2p/xr9e9IykHNUW5ky2TI4ui6yhAm++irl9oDlKpisxoDeOEiyspKDAYyoKqZTqqspmjjBbKIYSwurRdn9U2VFaUnRLsYgSB3qIRH9EtCSPCGsvLlfjYJVLxr0G+IpOpLYeo4tdt2qI0yKotmWeP5h9hFx0rizzpBLdo4o48+hfcn+khIXUBaMlKawADTjR9l+zZoFcNsKat3Sg4rqktQn7RMy2qgjfe+ds/Pc5pF2Vq5qtRI+jiZZcZ0Vc1G6i7/OBiL0/ZUOzRC4+TBWOqCbUCKqi0OFula2lRTQf3qNOwBBV79mqQJRQZQ6YGO406i5AH7FRpeNuJ32ExT1xM=
+    - secure: W2S7UJ4w2sWSTCpS3tHHslg0MhZsz68yjUQtoFy5I3dW9grdWEVWjeZyK+jLeW1jO9HVNxPZB2jWRRaiZkcgLbJk1VzK7NwClo9MSLtMHzVcO/4zxw2mKAH/E1UwXLLje+Pqhxjmz8ndZug0hjLhSnqpOB6UZxuM+961p3bXD/NrVZn9Cupu14MiPtsPPMRe5EFBoVPs9OdepJZKv0ojX9HReu2qqsP++sG3gYqBKgKjExP8Q/b+mjNrqTVqfHVMHV5iCLgtaxPCZW+1uEZOLSp3z1NvxyT6g1DXugDnZVsJTBHbBhS4yLCxexDlsfOJsZCMuGRpwhst6aCLwpXzfJ8tcDNItY2CVPeQecvA/dhgd6Cxh62DKcGaN9mQ/s0QATRrdnYzfVjQwk0V1PyH4Eb6QgKaiTVVfKfx3XvrsKILOSoZyCeab8bYpAKTgB7Bff/9UPNbn39q92stI2DSvpCRE4I0jLUD5D4fXQ0CJa2Ranv2ObCg3k/VU5gspwkd1owJD2nd5mhcJ1N/SxK1vRrRb0HqXYZq6hdrJT2J2bm3nfESvJU9/58Vd5LtRUdX9BLMSPu0sU0gg0F5puJRrCxmpJ241//V3OpBYCbBojjQipvF9ZnAJJTFqxvx6mvyJHhGwtoA6nkINJUe1PKxZPoPiySnYoOojTyBXukyAGk=
+    - secure: PRA0kbCSJO1fzfJtPm/Bc1ihq4Wo55+IN3edcQKcanQ3sOq2WOlFmBne007tLAy1YIh1Q3MoGwQQ2y3qnxEBXba4K3JbZUMdM9OQed8WEIFBbBlrdbHAbT28thlYro5HI2dpgW3r3W9y1jz82RDzSRBey1V4YVyDFxnWpXy++WIKy2/FwzxfMdBRMZ7xWjj0m2Mc2LcYZ9isfe7CO2D47ksKALU3JSwNc2o57GaX1oxWnzvsjEYQe1uyqLlC6v6wNWxeVA1RN+kANJYw4Up6rIF82ntW2quoKk/NV04xjrj0Lgkmu0wdJF3cqqOMj3niZC+s6yBTkAq0LruSpltsT++TOScBpiYERwt5HQhSQPyyoN7WrytDMtHq9A6fMDeMK/o/iRFpC32pbWsugFgbehFhPUIA20FknvOWhQXd4RBUSCpc2lXy0v4L0RqJYwUUQj2w8KFNvdnz07sRT3nNyJmr0ee9DfWIVvF8AYeXYf88bb6lu4GGtof3/L6G77eJmYpAbuICyYawNtuju9fO9o/18DPATyEma+35I3zqRFSGozB62tgWu+a670qkELUfZoAcYVyhBL/MfflKGQ0GKKZLvCFhzc9HhLywRwrt1z2/YaO+XO1kRisPVtGAnTe7X/Ow71uJA2gELHRnKqxzWQseSHiBwVZjVuYDfushxOM=
+
 install:
   - nvm install $NODE_VERSION
 
 script:
   - nvm use $NODE_VERSION
-  - mvn clean install
+  - ./mvnw clean verify
+
+before_deploy:
+  # decrypt CoffeeNet secret key
+  - openssl aes-256-cbc -K $encrypted_69ea10b618e5_key -iv $encrypted_69ea10b618e5_iv -in coffeenet.pgp.enc -out coffeenet.pgp -d
+  # import decrypted CoffeeNet secret key
+  - gpg --fast-import coffeenet.pgp
 
 deploy:
   - provider: releases
@@ -20,24 +33,10 @@ deploy:
     on:
       tags: true
       repo: coffeenet/coffeenet-navigation-bar
+
   - provider: script
-    script: echo "<settings><servers><server><id>releases.public.nexus.synyx.de</id><username>$NEXUS_USERNAME</username><password>$NEXUS_PASS</password></server></servers></settings>" > ~/settings.xml; mvn deploy --settings ~/settings.xml -DskipTests
+    script: ./mvnw gpg:sign-and-deploy-file --settings ${TRAVIS_BUILD_DIR}/.travis.settings.xml -Psign
     skip_cleanup: true
     on:
       tags: true
       repo: coffeenet/coffeenet-navigation-bar
-
-env:
-  global:
-  - NODE_VERSION=6
-  - secure: T+kQkWnSjCSbyfheQdAo4AJrMHzYpQj4bF1c37TV8iWWC70DxqPqv8zZmIOJsFr9JJYozQyhx7cL8tVWO5mBjiIFCmTMha7CEtQ1K6Jhq7t5vfhEvGeklMOI4Hx/Y4VLlZXpuaAoFPPjbsTDd0TLbgJxF/iaqLBsWWcSXtdzpCcNYonZuoS4CTLQgUGsSikLQsJDRtYrMUm+dgowVFzNUp3grfPx5os0hx44WVw3sEYoXdSVi4f6OGN0npvOZTbVA+jBqBye1zfp//OebdCtQOMpSXY7D1/4dDtKLku9++5bvXUYHIJPDj7sq/ErDUcPKGz1oG/kMkYdJa2Im5kmqXCAOZUZMKATbrzFV1NVqOGVG1xD8G3f3CkB2Pf0n9JTW2kABGzf5ezZZzWwc89uZ6DdsMjUJPm1Ee8cCztuTtkxcRTfFYddt/5cN57vG23UKHPY1NYmfF0DewjKk8Wpk6tChPr5JmgtEiK8MUzX0LaTsNHK5xixdXLbthujHy+Amo+th8cVjNVKCsOLHS9dlbolKYkd1/epDRGvdl7rgttjb+94x4/8jH8xR88oXZJLFUhMamI18kppyOmLYtiIGHlsKM/2twFoSqeSr3IdoX//kRInOA3soaIixlvxc+SWYQNSPAcxgjoAfszGVnWun6PBhOO1ZsVNpcoZkYu3qg4=
-  - secure: rbky9DFjs6DU7FMDCXv0d1bvSJosFS4hRNy8gGd4Ca6rXRdMhVAHI4HbBxwgeF+SkRSsItUAKZLHX9VYubR68B57TKHUd6WDzXuRc5x8eOeYpCIGxK7xfSG/wS80TfBlvGEnblhijnLm91WY+eI53m4MLewS22TTTT4pevV3ixERs1CZriZXNKPitpXezzotknQR6c62sc8QZjPzFeO96Nyaow2pHjmET6Mmz2oV54ZCnQ6szlHoGqmjdwsso7IY5kN67U6f38EyeSIdAvxN1Udyxi1OQS2pZckX3WkqmUWQLupSS87boAtHbq1uWKz5qs0Q3T23xX4N0uFUB6F9Oz6MEG2Cqme2XtUBW5bqPaAFKU8087WuuGYHunI2F1QDK79Sft02ZQh5hstGZONv9360nHvWVddyH0b0teuJ7wz9hmtGH1nId7aBC8xJA7TEZC0Q743s+coiAe5BDAzfHMxYDZN6pLvNpfxnqWsIe+pEpLyY84VHrn7Iz+WOPgPIxg0X61x0Qrhay5foGbveaaUYXpNQDa26CRLkr+MvEkt5oomNRoWzG08qnrOkf1I0cmrW3G3Bp9YEvLBzXNKv8KNsbLyIK3AI3ksnFPh7Ht6BVEeJS/GPjKNuxKJoEDz0sYCIWVbiwzwty+rf7KLP+Y77dSlJRG0ilvI7Tt4vFk8=
-
-notifications:
-  irc:
-    channels:
-      - "irc.synyx.de#CoffeeNet"
-    on_success: change # default: always
-    on_failure: always # default: always
-    use_notice: true
-    skip_join: true
