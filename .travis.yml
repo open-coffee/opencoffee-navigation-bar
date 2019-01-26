@@ -3,6 +3,10 @@ language: java
 jdk:
   - oraclejdk8
 
+cache:
+  directories:
+    - $HOME/.m2
+
 env:
   - MAVEN_CLI_OPTS="--batch-mode"
   - NODE_VERSION=6
