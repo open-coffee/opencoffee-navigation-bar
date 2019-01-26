@@ -27,7 +27,7 @@ and you are ready to go.
 
 ```xml
 <dependency>
-    <groupId>coffee.synyx</groupId>
+    <groupId>rocks.coffeenet</groupId>
     <artifactId>navigation-bar</artifactId>
     <version>${version}</version>
 </dependency>
