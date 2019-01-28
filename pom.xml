@@ -9,6 +9,25 @@
     <packaging>jar</packaging>
 
     <name>CoffeeNet Navigation Bar</name>
+    <url>https://github.com/coffeenet/coffeenet-navigation-bar</url>
+    <description>
+        The navigation bar of the CoffeeNet to provide a consistent look and feel
+    </description>
+
+    <licenses>
+        <license>
+            <name>Apache License</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Tobias Schneider</name>
+            <email>Tobias.Schneider@Tobsch.org</email>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
