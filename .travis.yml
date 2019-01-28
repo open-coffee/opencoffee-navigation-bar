@@ -22,12 +22,6 @@ script:
   - nvm use $NODE_VERSION
   - ./mvnw $MAVEN_CLI_OPTS clean verify
 
-before_deploy:
-  # decrypt CoffeeNet secret key
-  - openssl aes-256-cbc -K $encrypted_69ea10b618e5_key -iv $encrypted_69ea10b618e5_iv -in coffeenet.pgp.enc -out coffeenet.pgp -d
-  # import decrypted CoffeeNet secret key
-  - gpg --fast-import coffeenet.pgp
-
 deploy:
   - provider: releases
     api_key:
@@ -40,7 +34,9 @@ deploy:
       repo: coffeenet/coffeenet-navigation-bar
 
   - provider: script
-    script: ./mvnw $MAVEN_CLI_OPTS deploy --settings ${TRAVIS_BUILD_DIR}/.travis.settings.xml -Prelease
+    script: openssl aes-256-cbc -K $encrypted_69ea10b618e5_key -iv $encrypted_69ea10b618e5_iv -in coffeenet.pgp.enc -out coffeenet.pgp -d &&
+      gpg --fast-import coffeenet.pgp &&
+      ./mvnw $MAVEN_CLI_OPTS deploy --settings ${TRAVIS_BUILD_DIR}/.travis.settings.xml -Prelease
     skip_cleanup: true
     on:
       tags: true
